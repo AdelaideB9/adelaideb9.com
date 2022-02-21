@@ -3,9 +3,11 @@
     class="min-h-screen -mt-20 flex flex-col justify-center py-20 items-center gap-6 max-w-xl m-auto"
   >
     <div class="flex flex-col items-center gap-2">
-        <h1> New Member Registration</h1>
-        <p>Complete the form to join Capture the Flag Club FOR FREEEEE! We want to tell them this will give them the ability to participate in events, access to the Discord server, a user profile which keeps track of their CTFs</p>
-        <p>You will need to use your student email (ending in .edu.au)</p>
+      <h1>New Member Registration</h1>
+      <p>
+        Complete this form to join Capture the Flag Club, free of charge! By signing up you'll admission to our club events (in-person and online), access to our private Discord channels, and more perks on our member platforms.
+      </p>
+      <p>You will need to use your student email (ending in .edu.au)</p>
     </div>
     <form class="flex flex-col gap-y-6" @submit.prevent="submitRegistration">
       <input v-model="email" type="text" placeholder="University Email" />
@@ -74,7 +76,7 @@ const submitRegistration = async () => {
     email: email.value,
     password: password.value,
   });
-  useToast().success(res.data.message);
+  useToast().success(res.data);
   router.push("/");
 };
 const isFormValid = computed(

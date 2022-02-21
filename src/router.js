@@ -48,6 +48,12 @@ const routes = [
     meta: { theme: "purple" },
   },
   {
+    path: "/confirm",
+    name: "Confirm",
+    component: () => import("./views/ConfirmPage.vue"),
+    meta: { theme: "purple" },
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "Page not found",
     component: () => import("./views/404Page.vue"),
@@ -69,8 +75,7 @@ router.beforeEach(async (to, from, next) => {
     if (from.name == null) {
       store.commit("updatePageTheme", to.meta.theme);
     } else {
-      setTimeout(() => {
-      }, 300);
+      setTimeout(() => {}, 300);
     }
   });
   next();

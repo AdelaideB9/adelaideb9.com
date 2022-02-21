@@ -6,7 +6,7 @@
 
 <style>
 #constitution h1 {
-  @apply mt-10 mb-4;
+  @apply mb-4;
 }
 
 #constitution h2 {

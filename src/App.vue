@@ -8,7 +8,7 @@ import router from "./router";
 const store = useStore();
 const onLeave = () => {
   store.commit("updatePageTheme", router.currentRoute.value.meta.theme);
-}
+};
 </script>
 
 <template>

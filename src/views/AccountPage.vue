@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="flex gap-20 flex-col xl:flex-row">
-      <form class="flex flex-1 flex-col gap-y-10" @submit.prevent="submitRegistration">
+      <form
+        class="flex flex-1 flex-col gap-y-10"
+        @submit.prevent="submitRegistration"
+      >
         <h1>Account</h1>
 
         <div class="flex gap-6 flex-col md:flex-row">
@@ -46,7 +49,7 @@
 
       <div class="flex flex-1 flex-col gap-y-6">
         <h2>Emails</h2>
-        <CheckBox content="Subscribe to mailing list"/>
+        <CheckBox content="Subscribe to mailing list" />
         <h2>Danger Zone</h2>
         <Button
           class="w-auto bg-light-carmine"

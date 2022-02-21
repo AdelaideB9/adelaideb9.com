@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import http from "./services/http";
 
 let store = createStore({
   state: {
@@ -22,6 +23,14 @@ let store = createStore({
     FAIL_LOADING: (state) => {
       state.loading--;
       state.loadingFailed = true;
+    },
+  },
+  actions: {
+    async login(state, params) {
+      await http.post("/api/login", {
+        email: params.email,
+        password: params.password,
+      });
     },
   },
 });

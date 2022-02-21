@@ -15,5 +15,4 @@
     </div>
     <img src="src/assets/oweek-ghost.png" class="w-80" />
   </div>
-
 </template>

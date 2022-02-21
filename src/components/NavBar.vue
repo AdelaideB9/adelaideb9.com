@@ -7,10 +7,10 @@
         <router-link to="/">
           <img class="h-10" src="../assets/icon.png" />
         </router-link>
-        <router-link class="text-inherit" to="/ctfs">CTFs</router-link>
-        <router-link class="text-inherit" to="/events">Events</router-link>
-        <!-- <router-link class="text-inherit" to="/about">About</router-link> -->
-        <a class="text-inherit" href="https://blog.adelaideb9.com">Blog</a>
+        <router-link class="no-underline" to="/ctfs">CTFs</router-link>
+        <router-link class="no-underline" to="/events">Events</router-link>
+        <!-- <router-link class="no-underline" to="/about">About</router-link> -->
+        <a class="no-underline" href="https://blog.adelaideb9.com">Blog</a>
       </div>
       <AccountDropdown />
     </div>
@@ -42,39 +42,38 @@
         class="absolute top-0 left-0 flex flex-col w-full bg-secondary text-primary p-5 font-medium text-lg"
       >
         <router-link
-          class="text-inherit p-2 hover:bg-primary hover:text-secondary rounded"
+          class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
           to="/"
         >
           Home
         </router-link>
         <router-link
-          class="text-inherit p-2 hover:bg-primary hover:text-secondary rounded"
+          class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
           to="/ctfs"
           >CTFs</router-link
         >
         <router-link
-          class="text-inherit p-2 hover:bg-primary hover:text-secondary rounded"
+          class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
           to="/events"
           >Events</router-link
         >
         <!-- <router-link
-          class="text-inherit p-2 hover:bg-primary hover:text-secondary rounded"
+          class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
           to="/about"
           >About</router-link
         > -->
         <a
-          class="text-inherit p-2 hover:bg-primary hover:text-secondary rounded"
+          class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
           href="https://blog.adelaideb9.com"
           >Blog</a
         >
         <a
-          class="text-inherit p-2 bg-primary/10 hover:bg-primary hover:text-secondary rounded"
+          class="no-underline p-2 bg-primary/10 hover:bg-primary hover:text-secondary rounded"
         >
           <AccountDropdown />
         </a>
       </div>
     </transition>
-
   </div>
 </template>
 

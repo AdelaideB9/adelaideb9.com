@@ -23,7 +23,7 @@ let testEvent2 = {
 
 <template>
   <div class="flex flex-col gap-y-8">
-      <h1>Upcomming</h1>
+    <h1>Upcomming</h1>
     <input type="text" placeholder="Search" />
     <Ticket :details="testEvent" />
     <Ticket :details="testEvent2" />

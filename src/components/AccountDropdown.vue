@@ -1,8 +1,12 @@
 <template>
-  <div id="account-dropdown" class="relative" v-click-outside="unfocus">
+  <div
+    id="account-dropdown"
+    class="relative text-normal"
+    v-click-outside="unfocus"
+  >
     <div @click="showMenu = !showMenu" class="anchor cursor-pointer">
       <span v-if="$store.state.isLoggedIn">Account</span>
-      <span v-else>Log in / Register</span> 
+      <span v-else>Log in / Register</span>
     </div>
     <div
       v-if="showMenu"
@@ -14,7 +18,7 @@
           >Settings</router-link
         >
         <a class="menu-item text-secondary" @click="$store.dispatch('logout')"
-          >Logout</a
+          >Log out</a
         >
       </div>
       <div v-else>
@@ -38,12 +42,7 @@
             >Or register <router-link to="/register">here</router-link></span
           >
 
-          <Button
-            type="submit"
-            id="submit"
-            content="Login"
-            :class="store.pageClasses"
-          />
+          <Button type="submit" id="submit" content="Log in" />
         </form>
       </div>
     </div>
@@ -99,9 +98,9 @@ watch(
 let email = ref("");
 let password = ref("");
 const submitLogin = async () => {
-  useStore().dispatch("login", {
-    email,
-    password,
+  store.dispatch("login", {
+    email: email.value,
+    password: password.value,
   });
 };
 </script>

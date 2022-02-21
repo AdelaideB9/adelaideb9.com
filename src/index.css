@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: "Aqum two";
-  src: local("Aqum two"), 
+  src: local("Aqum two"),
     url(./assets/fonts/AqumTwoClassic.otf) format("opentype");
 }
 
@@ -94,7 +94,7 @@
   }
 
   a {
-    @apply text-sky-500;
+    @apply underline;
   }
 
   * {
