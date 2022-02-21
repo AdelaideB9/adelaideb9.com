@@ -7,22 +7,32 @@ defineProps({
 </script>
 
 <template>
-  <div class="w-full bg-white text-dark-blue p-12 leading-relaxed ticket">
-    <h2>{{ details.title }}</h2>
-    <div class="my-4 font-medium">
-      <p>
-        {{ details.date }}
-      </p>
-      <p v-if="details.url">
-        Website: <a :href="details.url">{{ details.url }}</a>
-      </p>
-      <p v-if="details.location">Location: {{ details.location }}</p>
-      <p v-if="details.difficulty">Difficulty: {{ details.difficulty }}</p>
-      <p v-if="details.capacity">Max Participants: {{ details.capacity }}</p>
+  <div
+    class="flex w-full items-center bg-white text-dark-blue p-12 leading-relaxed ticket gap-10"
+  >
+    <div>
+      <h2>{{ details.Name }}</h2>
+      <div class="my-4 font-medium">
+        <p>
+          {{ details.Date }}
+        </p>
+        <p v-if="details.URL">
+          Website: <a :href="details.URL">{{ details.URL }}</a>
+        </p>
+        <p v-if="details.Location">Location: {{ details.Location }}</p>
+        <p v-if="details.Difficulty">Difficulty: {{ details.Difficulty }}</p>
+        <p v-if="details.Capacity">Max Participants: {{ details.Capacity }}</p>
+      </div>
+      <p>{{ details.Description }}</p>
+      <!--<br />
+      <Button class="bg-royal-blue text-white" content="I'm Interested!" />-->
     </div>
-    <p>{{ details.description }}</p>
-    <br />
-    <Button class="bg-royal-blue text-white" content="I'm Interested!" />
+
+    <img
+      v-if="details.Image.Valid"
+      class="hidden md:block h-60"
+      :src="details.Image.String"
+    />
   </div>
 </template>
 

@@ -27,10 +27,15 @@ let store = createStore({
   },
   actions: {
     async login(state, params) {
-      await http.post("/api/login", {
+      let res = await http.post("/api/login", {
         email: params.email,
         password: params.password,
       });
+      store.commit("setLoggedIn", true);
+    },
+    async logout(state, params) {
+      await http.get("/api/logout");
+      store.commit("setLoggedIn", false);
     },
   },
 });

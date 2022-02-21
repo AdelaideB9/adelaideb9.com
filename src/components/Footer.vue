@@ -8,35 +8,37 @@ import SocialMedia from "./SocialMedia.vue";
       <h4>Contact Us</h4>
       hello@adelaideb9.com
     </div>
-    <div class="flex items-center text-right gap-6 ml-auto">
+    <div
+      class="flex items-center text-right gap-6 ml-auto md:flex-row flex-col row-span-2 md:row-span-1"
+    >
       <SocialMedia
         src="src/assets/discord-brands.svg"
         href="https://discord.gg/M3x2Bkbb3N"
-        exclusive="true"
+        :exclusive="true"
       />
       <SocialMedia
-        class="hidden md:block"
+        class=""
         src="src/assets/github-brands.svg"
         href="https://github.com/adelaideb9"
       />
       <SocialMedia
-        class="hidden md:block"
+        class=""
         src="src/assets/linkedin-brands.svg"
         href="https://au.linkedin.com/company/adelaideb9?trk=public_profile_volunteering-position_profile-section-card_full-click"
       />
       <SocialMedia
-        class="hidden md:block"
+        class=""
         src="src/assets/facebook-brands.svg"
         href="https://www.facebook.com/AdelaideB9"
       />
       <SocialMedia
-        class="hidden md:block"
+        class=""
         src="src/assets/ctftime-brands.svg"
         href="https://ctftime.org/team/147168"
       />
     </div>
 
-    <div class="flex items-center">
+    <div class="flex items-end">
       <img class="h-14 mr-6 hidden lg:block" src="../assets/logo.png" />
       <div class="flex-col">
         <h3 class="font-logo">ADELAIDE B9</h3>

@@ -16,10 +16,10 @@ const onLeave = () => {
     class="transition-colors duration-500 bg-primary text-secondary"
     :class="'theme-' + store.state.pageTheme"
   >
-    <TopProgress :trickleSpeed="50" color="#0ea5e9"></TopProgress>
+    <TopProgress :trickle-speed="50" color="#0ea5e9"></TopProgress>
     <div class="container m-auto px-12 min-h-screen">
       <NavBar />
-      <router-view class="py-10" v-slot="{ Component }">
+      <router-view v-slot="{ Component }" class="py-10">
         <transition name="fade" mode="out-in" @after-leave="onLeave">
           <component :is="Component" />
         </transition>

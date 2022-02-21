@@ -1,18 +1,8 @@
 <template>
-  <div id="constitution">
+  <div class="mb-8">
     <VueShowdown :markdown="constitutionMarkdown" />
   </div>
 </template>
-
-<style>
-#constitution h1 {
-  @apply mb-4;
-}
-
-#constitution h2 {
-  @apply mt-8 mb-4;
-}
-</style>
 
 <script setup>
 import { ref, onMounted } from "vue";
@@ -25,3 +15,13 @@ onMounted(async () => {
   constitutionMarkdown.value = res.data;
 });
 </script>
+
+<style scoped>
+h1 {
+  @apply mb-4;
+}
+
+h2 {
+  @apply mt-8 mb-4;
+}
+</style>

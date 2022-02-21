@@ -39,7 +39,7 @@
     <transition name="fade" mode="out-in">
       <div
         v-show="showMenu"
-        class="absolute top-0 left-0 flex flex-col w-full bg-secondary text-primary p-5 font-medium text-lg"
+        class="absolute top-0 left-0 flex flex-col w-full bg-secondary text-primary p-5 font-medium text-lg md:hidden"
       >
         <router-link
           class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
