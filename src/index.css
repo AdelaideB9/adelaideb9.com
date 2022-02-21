@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css?family=Space+Grotesk:400,500,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Space+Mono&display=swap");
+
+@font-face {
+  font-family: "Gangster Grotesk";
+  src: local("Gangster Grotesk"),
+    url(./assets/fonts/GangsterGrotesk-Light.ttf) format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Gangster Grotesk";
+  src: local("Gangster Grotesk"),
+    url(./assets/fonts/GangsterGrotesk-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Gangster Grotesk";
+  src: local("Gangster Grotesk"),
+    url(./assets/fonts/GangsterGrotesk-Bold.ttf) format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Aqum two";
+  src: local("Aqum two"), 
+    url(./assets/fonts/AqumTwoClassic.otf) format("opentype");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*"mint-green": "#47FFA6",
+  "soft-purple": "#A56FEB",
+  "royal-blue": "#4479E4",
+  "dark-blue": "#012A36",
+  "light-carmine": "#EF6F6C",
+  silver: "#D8D7D7",*/
+
+.theme-green {
+  --color-primary: 71 255 166;
+  --color-secondary: 1 42 54;
+}
+
+.theme-purple {
+  --color-primary: 165 111 235;
+  --color-secondary: 255 255 255;
+}
+
+.theme-blue {
+  --color-primary: 68 121 228;
+  --color-secondary: 255 255 255;
+}
+
+.theme-silver {
+  --color-primary: 216 215 215;
+  --color-secondary: 1 42 54;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  h5 {
+    @apply text-xl;
+  }
+
+  h6 {
+    @apply text-xl;
+  }
+
+  a {
+    @apply text-sky-500;
+  }
+
+  * {
+    @apply outline-none;
+  }
+
+  input {
+    @apply px-3 py-2 bg-black/10 rounded border-2 border-black/20;
+  }
+
+  input::placeholder {
+    @apply text-inherit opacity-50;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-active {
+  opacity: 0;
+}
