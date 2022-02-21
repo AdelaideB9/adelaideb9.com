@@ -5,7 +5,7 @@
     >
       <div class="flex gap-x-8 lg:gap-x-16 items-center">
         <router-link to="/">
-          <img class="h-10" src="../assets/icon.png" />
+          <img class="h-10" src="/img/icon.png" />
         </router-link>
         <router-link class="no-underline" to="/ctfs">CTFs</router-link>
         <router-link class="no-underline" to="/events">Events</router-link>
@@ -18,7 +18,7 @@
     <div class="md:hidden py-5 justify-center flex">
       <div class="w-full">
         <router-link to="/">
-          <img class="h-10" src="../assets/icon.png" />
+          <img class="h-10" src="/img/icon.png" />
         </router-link>
       </div>
       <svg

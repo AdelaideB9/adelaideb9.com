@@ -4,28 +4,28 @@
 @font-face {
   font-family: "Gangster Grotesk";
   src: local("Gangster Grotesk"),
-    url(./assets/fonts/GangsterGrotesk-Light.ttf) format("truetype");
+    url(/fonts/GangsterGrotesk-Light.ttf) format("truetype");
   font-weight: 300;
 }
 
 @font-face {
   font-family: "Gangster Grotesk";
   src: local("Gangster Grotesk"),
-    url(./assets/fonts/GangsterGrotesk-Regular.ttf) format("truetype");
+    url(/fonts/GangsterGrotesk-Regular.ttf) format("truetype");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Gangster Grotesk";
   src: local("Gangster Grotesk"),
-    url(./assets/fonts/GangsterGrotesk-Bold.ttf) format("truetype");
+    url(/fonts/GangsterGrotesk-Bold.ttf) format("truetype");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Aqum two";
   src: local("Aqum two"),
-    url(./assets/fonts/AqumTwoClassic.otf) format("opentype");
+    url(/fonts/AqumTwoClassic.otf) format("opentype");
 }
 
 @tailwind base;

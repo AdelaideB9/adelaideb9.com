@@ -13,6 +13,6 @@
         come join us! We'd love to have you.
       </p>
     </div>
-    <img src="../assets/general-ghost.png" class="w-96" />
+    <img src="/img/general-ghost.png" class="w-96" />
   </div>
 </template>
