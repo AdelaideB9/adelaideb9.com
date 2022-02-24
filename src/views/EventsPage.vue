@@ -33,7 +33,7 @@ onMounted(async () => {
 const filteredEvents = computed(() => {
   let result = [];
   for (const [i, value] of events.value.entries()) {
-    if (value.Name.toLowerCase().includes(filter.value.toLowerCase())) {
+    if (value.name.toLowerCase().includes(filter.value.toLowerCase())) {
       result.push(i);
     }
   }

@@ -1,11 +1,11 @@
 <template>
   <transition
-    v-on:before-enter="beforeEnter"
-    v-on:enter="enter"
-    v-on:after-enter="afterEnter"
-    v-bind:css="false"
+    :css="false"
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
   >
-    <div class="top-progress" :style="barStyle" v-if="show">
+    <div v-if="show" class="top-progress" :style="barStyle">
       <div class="peg" :style="pegStyle"></div>
     </div>
   </transition>
@@ -38,19 +38,6 @@ let queue = (() => {
 })();
 export default {
   name: "TopProgress",
-  data() {
-    return {
-      error: false,
-      show: false,
-      progress: 0,
-      opacity: 1,
-      status: null,
-      isPaused: false,
-    };
-  },
-  created() {
-    window.progressBar = this;
-  },
   props: {
     speed: {
       type: Number,
@@ -60,7 +47,6 @@ export default {
       type: String,
       default: "#29d",
     },
-    colorShadow: String,
     errorColor: {
       type: String,
       default: "#f44336",
@@ -94,6 +80,16 @@ export default {
       default: 9999,
     },
   },
+  data() {
+    return {
+      error: false,
+      show: false,
+      progress: 0,
+      opacity: 1,
+      status: null,
+      isPaused: false,
+    };
+  },
   computed: {
     progressColor() {
       return this.error ? this.errorColor : this.color;
@@ -102,7 +98,7 @@ export default {
       return typeof this.status === "number";
     },
     boxShadow() {
-      return this.colorShadow || this.progressColor;
+      return this.progressColor;
     },
     barStyle() {
       return {
@@ -130,6 +126,9 @@ export default {
         transform: "rotate(3deg) translate(0px, -4px)",
       };
     },
+  },
+  created() {
+    window.progressBar = this;
   },
   methods: {
     beforeEnter() {

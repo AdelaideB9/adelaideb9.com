@@ -5,7 +5,9 @@
     class="relative text-normal"
   >
     <div class="anchor cursor-pointer" @click="showMenu = !showMenu">
-      <span v-if="$store.state.isLoggedIn">Account</span>
+      <span v-if="$store.state.auth.isLoggedIn">{{
+        store.state.auth.session["first_name"]
+      }}</span>
       <span v-else>Log in / Register</span>
     </div>
     <div
@@ -13,11 +15,13 @@
       class="text-secondary absolute menu right-0 mt-2 z-50 border-black/20 border-2 rounded-lg shadow bg-primary w-full md:w-auto"
       :class="store.state.pageClasses"
     >
-      <div v-if="$store.state.isLoggedIn" class="flex flex-col">
+      <div v-if="$store.state.auth.isLoggedIn" class="flex flex-col">
         <router-link to="/settings" class="menu-item text-secondary"
           >Settings</router-link
         >
-        <a class="menu-item text-secondary" @click="$store.dispatch('logout')"
+        <a
+          class="menu-item text-secondary"
+          @click="$store.dispatch('auth/logout')"
           >Log out</a
         >
       </div>
@@ -38,11 +42,11 @@
             placeholder="Password"
           />
 
-          <span style="padding-bottom: 10px; padding-left: 5px"
+          <span
             >Or register <router-link to="/register">here</router-link></span
           >
 
-          <Button id="submit" content="Log in" />
+          <Button id="submit" content="Log in" :disabled="!canSubmit" />
         </form>
       </div>
     </div>
@@ -51,7 +55,7 @@
 
 <script setup>
 import Button from "./Button.vue";
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 const store = useStore();
@@ -65,13 +69,17 @@ watch(
 let email = ref("");
 let password = ref("");
 const submitLogin = async () => {
-  if (email.value.endsWith(".edu.au") && password.value != "") {
-    store.dispatch("login", {
+  if (canSubmit.value) {
+    store.dispatch("auth/login", {
       email: email.value,
       password: password.value,
     });
   }
 };
+
+const canSubmit = computed(
+  () => email.value.endsWith(".edu.au") && password.value.length >= 8
+);
 </script>
 
 <style scoped lang="scss">

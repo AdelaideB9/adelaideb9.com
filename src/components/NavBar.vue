@@ -81,8 +81,6 @@
 import AccountDropdown from "./AccountDropdown.vue";
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useStore } from "vuex";
-const store = useStore();
 let showMenu = ref(false);
 const route = useRoute();
 const unfocus = () => (showMenu.value = false);

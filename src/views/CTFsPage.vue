@@ -48,7 +48,7 @@ const filteredctfs = computed(() => {
     <Ticket
       v-for="[i, v] of ctfs.entries()"
       v-show="filteredctfs.includes(i)"
-      :key="v.ID"
+      :key="v.id"
       :details="v"
     />
   </div>

@@ -69,16 +69,26 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   nextTick(() => {
     document.title = to.name + " - AdelaideB9" || "AdelaideB9";
     if (from.name == null) {
       store.commit("updatePageTheme", to.meta.theme);
-    } else {
-      setTimeout(() => {}, 300);
+      if (store.state.auth.isLoggedIn) {
+        store.dispatch("auth/refreshSession");
+      }
     }
   });
-  next();
+
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!store.state.auth.isLoggedIn) {
+      next("/");
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

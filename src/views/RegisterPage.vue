@@ -2,15 +2,18 @@
   <div
     class="min-h-screen -mt-20 flex flex-col justify-center py-20 items-center gap-6 max-w-xl m-auto"
   >
-    <div class="flex flex-col items-center gap-2 text-center">
+    <div class="flex flex-col items-center gap-4 text-center">
       <h1>New Member Registration</h1>
-      <p class="text-justify">
-        Complete this form to join Capture the Flag Club, free of charge! By
-        signing up you'll admission to our club events (in-person and online),
-        access to our private Discord channels, and more perks on our member
-        platforms.
-      </p>
-      <p>You will need to use your student email (ending in .edu.au)</p>
+      <div>
+        <p class="text-justify">
+          Complete this form to join Capture the Flag Club, free of charge! By
+          signing up you'll gain admission to our club events (in-person and
+          online), access to our private Discord channels, and more perks on our
+          member platforms.
+
+          <b>You will need to use your student email (ending in .edu.au)</b>
+        </p>
+      </div>
     </div>
     <form class="flex flex-col gap-y-6" @submit.prevent="submitRegistration">
       <input v-model="email" type="text" placeholder="University Email" />
@@ -44,6 +47,16 @@
           class="flex-1"
         />
       </div>
+
+      <p v-if="password.length > 0">
+        Password length: {{ password.length }} / 8<br />
+        Passwords
+        {{
+          password == passwordRepeat && password.length > 0
+            ? "match"
+            : "do not match"
+        }}
+      </p>
 
       <p>
         By clicking submit you are agreeing that you have read and acknowledged
@@ -83,7 +96,6 @@ const isFormValid = computed(
     lastName.value != "" &&
     email.value.endsWith(".edu.au") &&
     password.value.length >= 8 &&
-    password.value != "" &&
     password.value == passwordRepeat.value
 );
 </script>

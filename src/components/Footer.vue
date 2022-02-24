@@ -6,7 +6,9 @@ import SocialMedia from "./SocialMedia.vue";
   <div class="bg-white text-dark-blue w-full grid grid-cols-2 gap-y-8 p-8">
     <div class="">
       <h4>Contact Us</h4>
-      hello@adelaideb9.com
+      <a class="no-underline" href="mailto:hello@adelaideb9.com"
+        >hello@adelaideb9.com</a
+      >
     </div>
     <div
       class="flex items-center text-right gap-6 ml-auto md:flex-row flex-col row-span-2 md:row-span-1"

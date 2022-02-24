@@ -1,9 +1,8 @@
 import { createStore } from "vuex";
-import http from "./services/http";
+import authModule from "./auth";
 
 let store = createStore({
   state: {
-    isLoggedIn: false,
     loading: 0,
     loadingFailed: false,
     pageTheme: String,
@@ -11,9 +10,6 @@ let store = createStore({
   mutations: {
     updatePageTheme(state, newPageTheme) {
       state.pageTheme = newPageTheme;
-    },
-    setLoggedIn(state, val) {
-      if (typeof val == "boolean") state.isLoggedIn = val;
     },
     START_LOADING: (state) => {
       state.loading++;
@@ -25,18 +21,9 @@ let store = createStore({
       state.loadingFailed = true;
     },
   },
-  actions: {
-    async login(state, params) {
-      let res = await http.post("/api/login", {
-        email: params.email,
-        password: params.password,
-      });
-      store.commit("setLoggedIn", true);
-    },
-    async logout(state, params) {
-      await http.get("/api/logout");
-      store.commit("setLoggedIn", false);
-    },
+  actions: {},
+  modules: {
+    auth: authModule,
   },
 });
 

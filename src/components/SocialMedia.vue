@@ -1,15 +1,13 @@
 <script setup>
-import { ref } from "vue";
-
 defineProps({
-  href: String,
-  src: String,
+  href: String(),
+  src: String(),
   exclusive: Boolean,
 });
 </script>
 
 <template>
-  <a class="no-underline text-xs" :href="href">
+  <a class="no-underline text-xs" target="_blank" :href="href">
     <div v-if="exclusive" class="flex bg-soft-purple/50 rounded-md p-2 gap-2">
       <img :src="src" class="h-8" />
       <p class="hidden md:block font-medium tracking-tighter text-center">

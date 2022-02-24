@@ -24,8 +24,7 @@
 
 @font-face {
   font-family: "Aqum two";
-  src: local("Aqum two"),
-    url(/fonts/AqumTwoClassic.otf) format("opentype");
+  src: local("Aqum two"), url(/fonts/AqumTwoClassic.otf) format("opentype");
 }
 
 @tailwind base;
