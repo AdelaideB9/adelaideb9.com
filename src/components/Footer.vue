@@ -14,28 +14,28 @@ import SocialMedia from "./SocialMedia.vue";
       class="flex items-center text-right gap-6 ml-auto md:flex-row flex-col row-span-2 md:row-span-1"
     >
       <SocialMedia
-        src="/img/discord-brands.svg"
+        src="/img/social/discord-brands.svg"
         href="https://discord.gg/M3x2Bkbb3N"
         :exclusive="true"
       />
       <SocialMedia
         class=""
-        src="/img/github-brands.svg"
+        src="/img/social/github-brands.svg"
         href="https://github.com/adelaideb9"
       />
       <SocialMedia
         class=""
-        src="/img/linkedin-brands.svg"
+        src="/img/social/linkedin-brands.svg"
         href="https://au.linkedin.com/company/adelaideb9?trk=public_profile_volunteering-position_profile-section-card_full-click"
       />
       <SocialMedia
         class=""
-        src="/img/facebook-brands.svg"
+        src="/img/social/facebook-brands.svg"
         href="https://www.facebook.com/AdelaideB9"
       />
       <SocialMedia
         class=""
-        src="/img/ctftime-brands.svg"
+        src="/img/social/ctftime-brands.svg"
         href="https://ctftime.org/team/147168"
       />
     </div>

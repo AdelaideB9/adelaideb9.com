@@ -5,7 +5,7 @@
     >
       <div class="flex gap-x-8 lg:gap-x-16 items-center">
         <router-link to="/">
-          <img class="h-10" src="/img/icon.png" />
+          <img class="h-10" src="/img/icons/icon.png" />
         </router-link>
         <router-link class="no-underline" to="/ctfs">CTFs</router-link>
         <router-link class="no-underline" to="/events">Events</router-link>
