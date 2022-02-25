@@ -3,25 +3,6 @@ import { computed, onMounted, ref } from "vue";
 import Ticket from "../components/Ticket.vue";
 import http from "../services/http";
 
-/*let testEvent = {
-  title: "Dice CTF 2022",
-  date: "Tomorrow at 7:30 PM - Monday 7th of Feb at 7:30 PM",
-  url: "https://ctf.dicega.ng/",
-  difficulty: "Impossible",
-  capacity: "Unlimited",
-  description:
-    "DiceCTF is a jeopardy-style CTF organized by DiceGang. You will be able to login this event with CTFtime ...",
-  location: "Old Uni Bar",
-};
-
-let testEvent2 = {
-  title: "Meet and Greet 1",
-  date: "1/3/2022",
-  location: "Old Uni Bar",
-  capacity: "35 peeps",
-  description: "Join us for a evening full of pizza, drinks and games!",
-};*/
-
 let events = ref([]);
 let filter = ref("");
 
@@ -30,26 +11,63 @@ onMounted(async () => {
   events.value = res.data.events;
 });
 
+let isUpcoming = ref(true);
+
 const filteredEvents = computed(() => {
   let result = [];
   for (const [i, value] of events.value.entries()) {
     if (value.name.toLowerCase().includes(filter.value.toLowerCase())) {
-      result.push(i);
+      if (isUpcoming.value) {
+        if (new Date() <= new Date(value.date)) {
+          result.push(i);
+        }
+      } else {
+        if (new Date() > new Date(value.date)) {
+          result.push(i);
+        }
+      }
     }
   }
   return result;
 });
+
+function sortByDate(events) {
+  events.sort(function (a, b) {
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  return events;
+}
 </script>
 
 <template>
   <div class="flex flex-col gap-y-8">
-    <h1>Upcoming</h1>
+    <div class="flex flex-col gap-y-2 sm:flex-row gap-x-8">
+      <h1
+        class="select-none cursor-pointer text-3xl md:text-4xl transition-all"
+        :class="{ 'text-secondary/25': !isUpcoming }"
+        @click="isUpcoming = true"
+      >
+        Upcoming
+      </h1>
+      <h1
+        class="select-none cursor-pointer text-3xl md:text-4xl transition-all"
+        :class="{ 'text-secondary/25': isUpcoming }"
+        @click="isUpcoming = false"
+      >
+        Previous
+      </h1>
+    </div>
     <input v-model="filter" type="text" placeholder="Search" />
-    <Ticket
-      v-for="[i, v] of events.entries()"
-      v-show="filteredEvents.includes(i)"
-      :key="v.ID"
-      :details="v"
-    />
+    <transition name="fade" mode="out-in">
+      <div>
+        <Ticket
+          v-for="[i, v] of sortByDate(events).entries()"
+          v-show="filteredEvents.includes(i)"
+          :key="v.ID"
+          :details="v"
+        />
+      </div>
+    </transition>
   </div>
 </template>

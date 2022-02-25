@@ -30,23 +30,56 @@ onMounted(async () => {
   ctfs.value = res.data.ctfs;
 });
 
+let isUpcoming = ref(true);
+
 const filteredctfs = computed(() => {
   let result = [];
   for (const [i, value] of ctfs.value.entries()) {
-    if (value.Name.toLowerCase().includes(filter.value.toLowerCase())) {
-      result.push(i);
+    if (value.name.toLowerCase().includes(filter.value.toLowerCase())) {
+      if (isUpcoming.value) {
+        if (new Date() <= new Date(value.date)) {
+          result.push(i);
+        }
+      } else {
+        if (new Date() > new Date(value.date)) {
+          result.push(i);
+        }
+      }
     }
   }
   return result;
 });
+
+function sortByDate(ctfs) {
+  ctfs.sort(function (a, b) {
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  return ctfs;
+}
 </script>
 
 <template>
   <div class="flex flex-col gap-y-8">
-    <h1>Upcoming</h1>
+    <div class="flex flex-col gap-y-2 sm:flex-row gap-x-8">
+      <h1
+        class="select-none cursor-pointer text-3xl md:text-4xl transition-all"
+        :class="{ 'text-secondary/25': !isUpcoming }"
+        @click="isUpcoming = true"
+      >
+        Upcoming
+      </h1>
+      <h1
+        class="select-none cursor-pointer text-3xl md:text-4xl transition-all"
+        :class="{ 'text-secondary/25': isUpcoming }"
+        @click="isUpcoming = false"
+      >
+        Previous
+      </h1>
+    </div>
     <input v-model="filter" type="text" placeholder="Search" />
     <Ticket
-      v-for="[i, v] of ctfs.entries()"
+      v-for="[i, v] of sortByDate(ctfs).entries()"
       v-show="filteredctfs.includes(i)"
       :key="v.id"
       :details="v"

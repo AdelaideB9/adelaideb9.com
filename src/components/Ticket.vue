@@ -7,6 +7,33 @@ const store = useStore();
 defineProps({
   details: Object(),
 });
+
+function formatDate(start, end) {
+  let dateOptions = {
+    timeZone: "Australia/Adelaide",
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+  };
+
+  let dateStart = new Date(start);
+  let dateEnd = new Date(end);
+  let currentYear = new Date().getFullYear();
+
+  if (
+    currentYear == dateStart.getFullYear() &&
+    currentYear == dateEnd.getFullYear()
+  ) {
+    delete dateOptions.year;
+  }
+
+  return new Intl.DateTimeFormat("en-AU", dateOptions).formatRange(
+    dateStart,
+    dateEnd
+  );
+}
 </script>
 
 <template>
@@ -17,7 +44,7 @@ defineProps({
       <h2>{{ details.name }}</h2>
       <div class="my-4 font-medium">
         <p>
-          {{ details.date }}
+          {{ formatDate(details.date, details.end_date) }}
         </p>
         <p v-if="details.url">
           Website: <a :href="details.url">{{ details.url }}</a>
@@ -26,7 +53,7 @@ defineProps({
         <p v-if="details.difficulty">Difficulty: {{ details.difficulty }}</p>
         <p v-if="details.capacity">Max Participants: {{ details.capacity }}</p>
       </div>
-      <p>{{ details.description }}</p>
+      <p class="whitespace-pre-line">{{ details.description }}</p>
       <div v-if="store.state.auth.isLoggedIn">
         <br />
         <Button
