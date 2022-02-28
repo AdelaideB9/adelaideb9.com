@@ -39,28 +39,36 @@
           />
         </div>
 
-        <Button
+        <button
           class="w-auto"
-          content="Submit"
           :disabled="!isFormValid"
           @click="submitRegistration"
-        ></Button>
+        >Submit</button>
       </form>
-
       <div class="flex flex-1 flex-col gap-y-6">
+        <div class="flex justify-between">
+          <h2>Discord Token</h2>
+          <Tooltip content="Join our server with the link in the footer, and send your token to our bot, which will DM you when you join (Kitten Bot#6383)."/>
+        </div>
+        <FieldButton>Connect</FieldButton>
+
         <h2>Emails</h2>
         <CheckBox content="Subscribe to mailing list" />
+        <CheckBox content="Notify me the day before a CTF starts" />
+
         <h2>Danger Zone</h2>
-        <Button
+        <button
           class="w-auto bg-light-carmine"
-          content="Permanently delete account"
-        ></Button>
+        >Permanently delete account</button>
+        <!-- <FullscreenModal title="Delete Account">Are you sure you want to permanently delete this account? All of your data will be permanently removed, you will loose access to services including our Discord server, and will no longer be considered a member of this club.</FullscreenModal> -->
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
+import Tooltip from "../components/Tooltip.vue";
+import FieldButton from "../components/FieldButton.vue";
+import FullscreenModal from "../components/FullscreenModal.vue";
 </script>

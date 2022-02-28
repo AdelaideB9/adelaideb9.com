@@ -1,5 +1,4 @@
 <script setup>
-import Button from "../components/Button.vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -56,11 +55,10 @@ function formatDate(start, end) {
       <p class="whitespace-pre-line">{{ details.description }}</p>
       <div v-if="store.state.auth.isLoggedIn">
         <br />
-        <Button
+        <button
           class="bg-royal-blue text-white"
-          content="I'm Interested!"
           disabled="true"
-        />
+        >I'm Interested!</button>
       </div>
     </div>
 

@@ -18,7 +18,7 @@
     <div class="md:hidden py-5 justify-center flex">
       <div class="w-full">
         <router-link to="/">
-          <img class="h-10" src="/img/icon.png" />
+          <img class="h-10" src="/img/icons/icon.png" />
         </router-link>
       </div>
       <svg

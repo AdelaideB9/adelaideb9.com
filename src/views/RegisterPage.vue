@@ -47,7 +47,6 @@
           class="flex-1"
         />
       </div>
-
       <p v-if="password.length > 0">
         Password length: {{ password.length }} / 8<br />
         Passwords
@@ -64,13 +63,12 @@
         <router-link to="/constitution">club constitution</router-link>
       </p>
 
-      <Button class="w-auto" content="Submit" :disabled="!isFormValid"></Button>
+      <button class="w-auto" :disabled="!isFormValid">Submit</button>
     </form>
   </div>
 </template>
 
 <script setup>
-import Button from "../components/Button.vue";
 import http from "../services/http";
 import { ref, computed } from "vue";
 import { useToast } from "vue-toastification";
@@ -87,7 +85,9 @@ const submitRegistration = async () => {
     email: email.value,
     password: password.value,
   });
-  useToast().success(res.data);
+  if (res.data.message) {
+    useToast().success(res.data.message);
+  }
   router.push("/");
 };
 const isFormValid = computed(

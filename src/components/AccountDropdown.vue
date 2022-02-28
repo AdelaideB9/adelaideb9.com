@@ -46,7 +46,7 @@
             >Or register <router-link to="/register">here</router-link></span
           >
 
-          <Button id="submit" content="Log in" :disabled="!canSubmit" />
+          <button id="submit" :disabled="!canSubmit">Log in</button>
         </form>
       </div>
     </div>
@@ -54,7 +54,6 @@
 </template>
 
 <script setup>
-import Button from "./Button.vue";
 import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";

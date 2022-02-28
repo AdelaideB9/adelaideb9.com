@@ -17,7 +17,7 @@ const onLeave = () => {
     :class="'theme-' + store.state.pageTheme"
   >
     <TopProgress :trickle-speed="50" color="#0ea5e9"></TopProgress>
-    <div class="container m-auto px-12 min-h-screen">
+    <div class="container m-auto px-6 min-h-screen">
       <NavBar />
       <router-view v-slot="{ Component }" class="py-10">
         <transition name="fade" mode="out-in" @after-leave="onLeave">

@@ -78,6 +78,10 @@ function sortByDate(ctfs) {
       </h1>
     </div>
     <input v-model="filter" type="text" placeholder="Search" />
+    <p v-if="filteredctfs.length < 1 && isUpcoming">
+      Hey, we're taking a brief break. Look's like there aren't any CTFs coming
+      up soon. Check out our past {{ ctfs.length }} ctfs in the meantime.
+    </p>
     <Ticket
       v-for="[i, v] of sortByDate(ctfs).entries()"
       v-show="filteredctfs.includes(i)"

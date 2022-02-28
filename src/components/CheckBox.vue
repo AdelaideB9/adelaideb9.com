@@ -8,10 +8,10 @@ defineProps({
 </script>
 
 <template>
-  <label>
+  <label class="flex align-middle gap-2 ">
     <input type="checkbox" />
     {{ content }} </label
-  ><br />
+  >
 </template>
 
 <style scoped>

@@ -30,8 +30,8 @@ const routes = [
     meta: { theme: "silver" },
   },
   {
-    path: "/account",
-    name: "Account",
+    path: "/settings",
+    name: "Settings",
     component: () => import("./views/AccountPage.vue"),
     meta: { theme: "purple", requiresAuth: true },
   },
