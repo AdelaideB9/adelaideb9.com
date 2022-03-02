@@ -16,7 +16,17 @@ defineProps({
     type: String,
     default: "Cancel",
   },
+  action: {
+    type: Function,
+    default: null
+  }
 });
+
+const emit = defineEmits(['close'])
+
+const close = () => {
+  emit('close')
+}
 </script>
 
 <template>
@@ -58,7 +68,7 @@ defineProps({
             </svg>
           </div>
           <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <h3 class="text-lg leading-6 font-medium" id="modal-title">{{title}}</h3>
+            <h3 id="modal-title" class="text-lg leading-6 font-medium">{{title}}</h3>
             <div class="mt-2">
               <p class="text-sm"><slot></slot></p>
             </div>
@@ -66,9 +76,9 @@ defineProps({
         </div>
       </div>
       <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button type="button" class="w-full inline-flex justify-center sm:ml-3 sm:w-auto sm:text-sm" :class="confirmButtonClasses">{{confirmButtonText}}</button>
-        <div class="h-2"></div>
-        <button type="button" class="w-full inline-flex justify-center px-4 py-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">{{cancelButtonText}}</button>
+        <button v-if="action != null" class="w-full inline-flex justify-center sm:ml-3 sm:w-auto sm:text-sm" :class="confirmButtonClasses" @click="action(); close()">{{confirmButtonText}}</button>
+        <div v-if="action != null" class="h-2"></div>
+        <button class="w-full inline-flex justify-center px-4 py-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" @click="close">{{cancelButtonText}}</button>
       </div>
     </div>
   </div>

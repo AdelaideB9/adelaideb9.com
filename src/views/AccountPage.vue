@@ -59,8 +59,9 @@
         <h2>Danger Zone</h2>
         <button
           class="w-auto bg-light-carmine"
+          @click="showDeletePopup = true"
         >Permanently delete account</button>
-        <!-- <FullscreenModal title="Delete Account">Are you sure you want to permanently delete this account? All of your data will be permanently removed, you will loose access to services including our Discord server, and will no longer be considered a member of this club.</FullscreenModal> -->
+        <FullscreenModal v-if="showDeletePopup" title="Delete Account" confirm-button-text="Delete" :action="deleteAccount" @close="showDeletePopup = false">Are you sure you want to permanently delete this account? All of your data will be permanently removed, you will loose access to services including our Discord server, and will no longer be considered a member of this club.</FullscreenModal>
       </div>
     </div>
   </div>
@@ -71,4 +72,11 @@ import CheckBox from "../components/CheckBox.vue";
 import Tooltip from "../components/Tooltip.vue";
 import FieldButton from "../components/FieldButton.vue";
 import FullscreenModal from "../components/FullscreenModal.vue";
+import { ref } from "vue";
+
+let showDeletePopup = ref(false)
+
+const deleteAccount = () => {
+  console.log("deleted")
+}
 </script>
