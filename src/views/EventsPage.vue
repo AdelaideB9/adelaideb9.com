@@ -44,14 +44,14 @@ function sortByDate(events) {
   <div class="flex flex-col gap-y-8">
     <div class="flex flex-col gap-y-2 sm:flex-row gap-x-8">
       <h1
-        class="select-none cursor-pointer text-3xl md:text-4xl transition-all"
+        class="select-none cursor-pointer text-3xl md:text-4xl"
         :class="{ 'text-secondary/25': !isUpcoming }"
         @click="isUpcoming = true"
       >
         Upcoming
       </h1>
       <h1
-        class="select-none cursor-pointer text-3xl md:text-4xl transition-all"
+        class="select-none cursor-pointer text-3xl md:text-4xl"
         :class="{ 'text-secondary/25': isUpcoming }"
         @click="isUpcoming = false"
       >
@@ -59,15 +59,20 @@ function sortByDate(events) {
       </h1>
     </div>
     <input v-model="filter" type="text" placeholder="Search" />
-    <transition name="fade" mode="out-in">
-      <div>
-        <Ticket
-          v-for="[i, v] of sortByDate(events).entries()"
-          v-show="filteredEvents.includes(i)"
-          :key="v.ID"
-          :details="v"
-        />
-      </div>
-    </transition>
+    <p
+      v-if="filteredEvents.length < 1 && isUpcoming"
+      class="text-center max-w-3xl mx-auto my-10"
+    >
+      Hey, looks like there aren't any events coming up soon! We might be taking
+      a break, or grinding out a bunch of CTFs. Check out our past
+      {{ events.length }} events in the meantime.
+    </p>
+    <Ticket
+      v-for="v of sortByDate(
+        events.filter((_, i) => filteredEvents.includes(i))
+      )"
+      :key="v.ID"
+      :details="v"
+    />
   </div>
 </template>

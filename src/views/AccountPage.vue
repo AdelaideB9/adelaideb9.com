@@ -43,12 +43,16 @@
           class="w-auto"
           :disabled="!isFormValid"
           @click="submitRegistration"
-        >Submit</button>
+        >
+          Submit
+        </button>
       </form>
       <div class="flex flex-1 flex-col gap-y-6">
         <div class="flex justify-between">
           <h2>Discord Token</h2>
-          <Tooltip content="Join our server with the link in the footer, and send your token to our bot, which will DM you when you join (Kitten Bot#6383)."/>
+          <Tooltip
+            content="Join our server with the link in the footer, and send your token to our bot, which will DM you when you join (Kitten Bot#6383)."
+          />
         </div>
         <FieldButton>Connect</FieldButton>
 
@@ -57,11 +61,20 @@
         <CheckBox content="Notify me the day before a CTF starts" />
 
         <h2>Danger Zone</h2>
-        <button
-          class="w-auto bg-light-carmine"
-          @click="showDeletePopup = true"
-        >Permanently delete account</button>
-        <FullscreenModal v-if="showDeletePopup" title="Delete Account" confirm-button-text="Delete" :action="deleteAccount" @close="showDeletePopup = false">Are you sure you want to permanently delete this account? All of your data will be permanently removed, you will loose access to services including our Discord server, and will no longer be considered a member of this club.</FullscreenModal>
+        <button class="w-auto bg-light-carmine" @click="showDeletePopup = true">
+          Permanently delete account
+        </button>
+        <FullscreenModal
+          v-if="showDeletePopup"
+          title="Delete Account"
+          confirm-button-text="Delete"
+          :action="deleteAccount"
+          @close="showDeletePopup = false"
+          >Are you sure you want to permanently delete this account? All of your
+          data will be permanently removed, you will loose access to services
+          including our Discord server, and will no longer be considered a
+          member of this club.</FullscreenModal
+        >
       </div>
     </div>
   </div>
@@ -74,9 +87,9 @@ import FieldButton from "../components/FieldButton.vue";
 import FullscreenModal from "../components/FullscreenModal.vue";
 import { ref } from "vue";
 
-let showDeletePopup = ref(false)
+let showDeletePopup = ref(false);
 
 const deleteAccount = () => {
-  console.log("deleted")
-}
+  console.log("deleted");
+};
 </script>

@@ -1,8 +1,6 @@
 <template>
   <div v-click-outside="unfocus">
-    <div
-      class="hidden md:flex items-center px-6 lg:px-12 h-20 font-medium justify-between"
-    >
+    <div class="hidden md:flex items-center h-20 font-medium justify-between">
       <div class="flex gap-x-8 lg:gap-x-16 items-center">
         <router-link to="/">
           <img class="h-10" src="/img/icons/icon.png" />
@@ -15,12 +13,10 @@
       <AccountDropdown />
     </div>
 
-    <div class="md:hidden py-5 justify-center flex">
-      <div class="w-full">
-        <router-link to="/">
-          <img class="h-10" src="/img/icons/icon.png" />
-        </router-link>
-      </div>
+    <div class="md:hidden h-20 items-center justify-between flex">
+      <router-link to="/">
+        <img class="h-10" src="/img/icons/icon.png" />
+      </router-link>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-10 cursor-pointer select-none items-end"

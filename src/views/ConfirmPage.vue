@@ -14,7 +14,7 @@ onMounted(async () => {
     try {
       let res = await http.post("/api/verify", { token: route.query.token });
       router.push("/");
-      useToast().success(res.data);
+      useToast().success(res.data.message);
     } catch (err) {
       router.push("/");
     }

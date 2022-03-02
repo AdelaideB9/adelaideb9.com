@@ -32,7 +32,7 @@ onMounted(async () => {
 
 let isUpcoming = ref(true);
 
-const filteredctfs = computed(() => {
+const filteredCTFs = computed(() => {
   let result = [];
   for (const [i, value] of ctfs.value.entries()) {
     if (value.name.toLowerCase().includes(filter.value.toLowerCase())) {
@@ -63,14 +63,14 @@ function sortByDate(ctfs) {
   <div class="flex flex-col gap-y-8">
     <div class="flex flex-col gap-y-2 sm:flex-row gap-x-8">
       <h1
-        class="select-none cursor-pointer text-3xl md:text-4xl transition-all"
+        class="select-none cursor-pointer text-3xl md:text-4xl"
         :class="{ 'text-secondary/25': !isUpcoming }"
         @click="isUpcoming = true"
       >
         Upcoming
       </h1>
       <h1
-        class="select-none cursor-pointer text-3xl md:text-4xl transition-all"
+        class="select-none cursor-pointer text-3xl md:text-4xl"
         :class="{ 'text-secondary/25': isUpcoming }"
         @click="isUpcoming = false"
       >
@@ -78,13 +78,16 @@ function sortByDate(ctfs) {
       </h1>
     </div>
     <input v-model="filter" type="text" placeholder="Search" />
-    <p v-if="filteredctfs.length < 1 && isUpcoming">
-      Hey, we're taking a brief break. Look's like there aren't any CTFs coming
-      up soon. Check out our past {{ ctfs.length }} ctfs in the meantime.
+    <p
+      v-if="filteredCTFs.length < 1 && isUpcoming"
+      class="text-center max-w-3xl mx-auto my-10"
+    >
+      Hey, looks like there aren't any CTFs coming up soon! We might be taking a
+      break, or maybe training ourselves for the next big event. Check out our
+      past {{ ctfs.length }} ctfs in the meantime.
     </p>
     <Ticket
-      v-for="[i, v] of sortByDate(ctfs).entries()"
-      v-show="filteredctfs.includes(i)"
+      v-for="v of sortByDate(ctfs.filter((_, i) => filteredCTFs.includes(i)))"
       :key="v.id"
       :details="v"
     />
