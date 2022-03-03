@@ -24,10 +24,12 @@ let testEvent2 = {
 
 let ctfs = ref([]);
 let filter = ref("");
+let loaded = ref(false);
 
 onMounted(async () => {
   let res = await http.get("/api/ctfs");
   ctfs.value = res.data.ctfs;
+  loaded.value = true;
 });
 
 let isUpcoming = ref(true);
@@ -79,7 +81,7 @@ function sortByDate(ctfs) {
     </div>
     <input v-model="filter" type="text" placeholder="Search" />
     <p
-      v-if="filteredCTFs.length < 1 && isUpcoming"
+      v-if="filteredCTFs.length < 1 && isUpcoming && loaded"
       class="text-center max-w-3xl mx-auto my-10"
     >
       Hey, looks like there aren't any CTFs coming up soon! We might be taking a

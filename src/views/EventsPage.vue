@@ -5,10 +5,12 @@ import http from "../services/http";
 
 let events = ref([]);
 let filter = ref("");
+let loaded = ref(false);
 
 onMounted(async () => {
   let res = await http.get("/api/events");
   events.value = res.data.events;
+  loaded.value = true;
 });
 
 let isUpcoming = ref(true);
@@ -60,7 +62,7 @@ function sortByDate(events) {
     </div>
     <input v-model="filter" type="text" placeholder="Search" />
     <p
-      v-if="filteredEvents.length < 1 && isUpcoming"
+      v-if="filteredEvents.length < 1 && isUpcoming && loaded"
       class="text-center max-w-3xl mx-auto my-10"
     >
       Hey, looks like there aren't any events coming up soon! We might be taking
