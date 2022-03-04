@@ -20,6 +20,10 @@ defineProps({
     type: Function,
     default: null,
   },
+  showIcon: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["close"]);
@@ -30,7 +34,6 @@ const close = () => {
 </script>
 
 <template>
-  <!-- This example requires Tailwind CSS v2.0+ -->
   <div
     class="fixed z-10 inset-0 overflow-y-auto"
     aria-labelledby="modal-title"
@@ -38,16 +41,6 @@ const close = () => {
     aria-modal="true"
   >
     <div class="flex items-center justify-center min-h-screen px-4 text-center">
-      <!--
-      Background overlay, show/hide based on modal state.
-
-      Entering: "ease-out duration-300"
-        From: "opacity-0"
-        To: "opacity-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100"
-        To: "opacity-0"
-    -->
       <div
         class="fixed inset-0 bg-black/50 bg-opacity-75 transition-opacity"
         aria-hidden="true"
@@ -61,22 +54,13 @@ const close = () => {
         >&#8203;</span
       >
 
-      <!--
-      Modal panel, show/hide based on modal state.
-
-      Entering: "ease-out duration-300"
-        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        To: "opacity-100 translate-y-0 sm:scale-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100 translate-y-0 sm:scale-100"
-        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-    -->
       <div
         class="bg-primary text-inherit inline-block align-bottom rounded text-left overflow-hidden shadow-lg transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
       >
         <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
+          <div class="sm:flex sm:items-start gap-4">
             <div
+              v-if="showIcon"
               class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-white shadow sm:mx-0 sm:h-10 sm:w-10"
             >
               <!-- Heroicon name: outline/exclamation -->
@@ -96,12 +80,14 @@ const close = () => {
                 />
               </svg>
             </div>
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <div class="mt-3 text-center sm:mt-0 sm:text-left">
               <h3 id="modal-title" class="text-lg leading-6 font-medium">
                 {{ title }}
               </h3>
               <div class="mt-2">
-                <p class="text-sm"><slot></slot></p>
+                <p class="text-sm">
+                  <slot></slot>
+                </p>
               </div>
             </div>
           </div>
@@ -109,7 +95,7 @@ const close = () => {
         <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
           <button
             v-if="action != null"
-            class="w-full inline-flex justify-center sm:ml-3 sm:w-auto sm:text-sm"
+            class="w-full inline-flex justify-center sm:ml-3 sm:w-auto"
             :class="confirmButtonClasses"
             @click="
               action();
@@ -120,10 +106,14 @@ const close = () => {
           </button>
           <div v-if="action != null" class="h-2"></div>
           <button
-            class="w-full inline-flex justify-center px-4 py-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            class="w-full inline-flex justify-center px-4 py-2 sm:mt-0 sm:ml-3 sm:w-auto"
             @click="close"
           >
-            {{ cancelButtonText }}
+            {{
+              action == null && cancelButtonText == "Cancel"
+                ? "OK"
+                : cancelButtonText
+            }}
           </button>
         </div>
       </div>

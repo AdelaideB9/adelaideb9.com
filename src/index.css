@@ -116,6 +116,10 @@
   }
 }
 
+.Vue-Toastification__close-button {
+  @apply shadow-none m-0;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;

@@ -16,19 +16,19 @@
       </div>
     </div>
     <form class="flex flex-col gap-y-6" @submit.prevent="submitRegistration">
-      <input v-model="email" type="text" placeholder="University Email" />
+      <input v-model="email" type="text" placeholder="University email" />
 
       <div class="flex gap-4 flex-col md:flex-row">
         <input
           v-model="firstName"
           type="text"
-          placeholder="First Name"
+          placeholder="First name"
           class="flex-1"
         />
         <input
           v-model="lastName"
           type="text"
-          placeholder="Last Name"
+          placeholder="Last name"
           class="flex-1"
         />
       </div>
@@ -43,7 +43,7 @@
         <input
           v-model="passwordRepeat"
           type="password"
-          placeholder="Repeat Password"
+          placeholder="Repeat password"
           class="flex-1"
         />
       </div>

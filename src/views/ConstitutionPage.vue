@@ -1,6 +1,6 @@
 <template>
   <div class="mb-8">
-    <VueShowdown :markdown="constitutionMarkdown" />
+    <VueShowdown id="markdown" :markdown="constitutionMarkdown" />
   </div>
 </template>
 
@@ -16,12 +16,30 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
-h1 {
-  @apply mb-4;
-}
+<style lang="scss" scoped>
+#markdown {
+  :deep(h1) {
+    @apply mb-4;
+  }
 
-h2 {
-  @apply mt-8 mb-4;
+  :deep(h2) {
+    @apply mt-8 mb-4;
+  }
+
+  :deep(ul) {
+    @apply list-disc m-4 pl-6;
+  }
+
+  :deep(li) {
+    @apply m-1;
+  }
+
+  :deep(ol) {
+    @apply list-decimal m-4 pl-6;
+  }
+
+  :deep(p) {
+    @apply mb-2;
+  }
 }
 </style>
