@@ -63,7 +63,9 @@
         <router-link to="/constitution">club constitution</router-link>
       </p>
 
-      <button class="w-auto" :disabled="!isFormValid">Submit</button>
+      <button class="w-auto" :disabled="!isFormValid || submitted">
+        Submit
+      </button>
     </form>
   </div>
 </template>
@@ -78,16 +80,16 @@ let lastName = ref("");
 let password = ref("");
 let passwordRepeat = ref("");
 let email = ref("");
+let submitted = ref(false);
 const submitRegistration = async () => {
+  submitted.value = true;
   let res = await http.post("/api/register", {
     "first-name": firstName.value,
     "last-name": lastName.value,
     email: email.value,
     password: password.value,
   });
-  if (res.data.message) {
-    useToast().success(res.data.message);
-  }
+  useToast().success(res.data);
   router.push("/");
 };
 const isFormValid = computed(

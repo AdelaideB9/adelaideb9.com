@@ -9,7 +9,7 @@ let loaded = ref(false);
 
 onMounted(async () => {
   let res = await http.get("/api/events");
-  events.value = res.data.events;
+  events.value = res.data;
   loaded.value = true;
 });
 

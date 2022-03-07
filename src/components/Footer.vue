@@ -43,7 +43,7 @@ import SocialMedia from "./SocialMedia.vue";
     <div class="flex items-end">
       <img class="h-14 mr-6 hidden lg:block" src="/img/logo.png" />
       <div class="flex-col">
-        <h3 class="font-logo">ADELAIDE B9</h3>
+        <h3 class="font-logo font-normal">ADELAIDE B9</h3>
         <p class="text-sm">
           The University of Adelaide, North Terrace<br />&copy;
           {{ new Date().getFullYear() }} AdelaideB9

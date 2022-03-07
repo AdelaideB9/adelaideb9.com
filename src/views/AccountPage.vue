@@ -3,7 +3,7 @@
     <h1>Account Settings</h1>
 
     <div class="flex gap-12 flex-col xl:flex-row">
-      <div class="flex flex-1 flex-col gap-y-6">
+      <!-- <div class="flex flex-1 flex-col gap-y-6">
         <h2>Edit Details</h2>
 
         <form
@@ -64,7 +64,7 @@
             Update
           </button>
         </form>
-      </div>
+      </div> -->
 
       <div class="flex flex-1 flex-col gap-y-12">
         <div class="flex flex-col gap-6">
@@ -132,7 +132,7 @@
             lose access to our Discord server.
           </FullscreenModal>
         </div>
-        <div class="flex flex-col gap-6">
+        <!-- <div class="flex flex-col gap-6">
           <h2>Emails</h2>
           <CheckBox content="Subscribe to mailing list" />
           <CheckBox content="Notify me the day before a CTF starts" />
@@ -157,7 +157,7 @@
             lose access to services including our Discord server, and will no
             longer be considered a member of this club.
           </FullscreenModal>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -195,7 +195,7 @@ const deleteAccount = () => {
 const generateDiscordToken = async () => {
   let res = await http.get("/api/discord/generate");
   generated.value = true;
-  discordText.value = "./auth " + res.data.token;
+  discordText.value = "./auth " + res.data;
 };
 
 const disconnectDiscord = async () => {
