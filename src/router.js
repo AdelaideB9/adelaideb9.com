@@ -72,13 +72,25 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   nextTick(() => {
     document.title = to.name + " - AdelaideB9" || "AdelaideB9";
-    if (from.name == null) {
-      store.commit("updatePageTheme", to.meta.theme);
-      if (store.state.auth.isLoggedIn) {
-        store.dispatch("auth/refreshSession");
-      }
-    }
   });
+
+  if (from.name == null) {
+    store.commit("updatePageTheme", to.meta.theme);
+    if (store.state.auth.isLoggedIn) {
+      store.dispatch("auth/refreshSession").then(() => {
+        if (to.matched.some((record) => record.meta.requiresAuth)) {
+          if (!store.state.auth.isLoggedIn) {
+            next("/");
+          } else {
+            next();
+          }
+        } else {
+          next();
+        }
+      });
+      return;
+    }
+  }
 
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!store.state.auth.isLoggedIn) {
