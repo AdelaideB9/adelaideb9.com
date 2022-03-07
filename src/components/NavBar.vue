@@ -128,14 +128,14 @@
           href="https://blog.adelaideb9.com"
           >Blog</a
         >
+        <router-link
+          class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
+          to="/about"
+          >About
+        </router-link>
         <a
           class="no-underline p-2 bg-primary/10 hover:bg-primary hover:text-secondary rounded"
         >
-          <router-link
-            class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
-            to="/about"
-            >About
-          </router-link>
           <AccountDropdown />
         </a>
       </div>

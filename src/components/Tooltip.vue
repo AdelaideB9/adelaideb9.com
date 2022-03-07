@@ -8,19 +8,28 @@ let open = ref(false);
 <template>
   <div class="relative">
     <div
-      id="button"
-      class="p-0.5 text-xl font-medium h-9 w-9 aspect-square shadow text-center border-black/20 bg-primary border-2 cursor-pointer hover:brightness-110 select-none rounded-full"
+      class="md:hidden p-0.5 text-xl font-medium h-9 w-9 shadow text-center border-black/20 bg-primary border-2 hover:brightness-110 select-none rounded-full"
       @click="open = true"
     >
       ?
     </div>
     <div
+      id="button"
+      class="hidden md:block p-0.5 text-xl font-medium h-9 w-9 shadow text-center border-black/20 bg-primary border-2 hover:brightness-110 select-none rounded-full"
+    >
+      ?
+    </div>
+    <div
       id="tooltip"
-      class="hidden px-3 py-2 absolute rounded border-black/20 bg-primary border-2 shadow w-72 select-none -translate-y-1/2 top-1/2 right-full text-sm mr-2 z-50"
+      class="hidden px-3 py-2 absolute rounded border-black/20 bg-primary border-2 shadow w-72 select-none -translate-y-1/2 top-1/2 right-full text-sm mr-2 z-20"
     >
       <slot></slot>
     </div>
-    <FullscreenModal v-if="open" title="Help" @close="open = false"
+    <FullscreenModal
+      v-if="open"
+      class="md:hidden"
+      title="Help"
+      @close="open = false"
       ><slot></slot
     ></FullscreenModal>
   </div>
