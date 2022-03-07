@@ -28,10 +28,6 @@ http.interceptors.response.use(
       } catch (err) {
         store.commit("auth/setLoggedIn", false);
         router.push("/");
-        store.commit("FAIL_LOADING");
-        if (err.response.data.message) toast.error(err.response.data.message);
-        else toast.error("Unknown error");
-        return Promise.reject(err);
       }
     }
     store.commit("FAIL_LOADING");

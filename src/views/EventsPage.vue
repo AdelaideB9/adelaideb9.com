@@ -35,7 +35,7 @@ const filteredEvents = computed(() => {
 
 function sortByDate(events) {
   events.sort(function (a, b) {
-    return new Date(a.date) - new Date(b.date);
+    return new Date(b.date) - new Date(a.date);
   });
 
   return events;

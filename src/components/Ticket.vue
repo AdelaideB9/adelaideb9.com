@@ -39,7 +39,7 @@ function formatDate(start, end) {
 
 <template>
   <div
-    class="flex items-center bg-white text-dark-blue p-12 leading-relaxed ticket gap-10"
+    class="flex items-center justify-between bg-white text-dark-blue p-12 leading-relaxed ticket gap-10"
   >
     <div>
       <h2>{{ details.name }}</h2>
