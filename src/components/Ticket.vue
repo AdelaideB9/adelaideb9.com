@@ -16,6 +16,7 @@ function formatDate(start, end) {
     month: "long",
     day: "numeric",
     hour: "numeric",
+    minute: "numeric",
   };
 
   let dateStart = new Date(start);
