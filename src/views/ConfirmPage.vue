@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div style="display: flex; justify-content: center;">
+    <button @click="verify">Click to verify your account</button>
+  </div>
 </template>
 
 <script setup>
@@ -10,6 +12,13 @@ import { useToast } from "vue-toastification";
 const router = useRouter();
 const route = useRoute();
 onMounted(async () => {
+  if (!route.query.token) {
+    router.push("/");
+    useToast().error("What are you doing?!");
+  }
+});
+
+const verify = async () => {
   if (route.query.token) {
     try {
       let res = await http.post("/api/verify", { token: route.query.token });
@@ -18,9 +27,6 @@ onMounted(async () => {
     } catch (err) {
       router.push("/");
     }
-  } else {
-    router.push("/");
-    useToast().error("What are you doing?!");
   }
-});
+}
 </script>
