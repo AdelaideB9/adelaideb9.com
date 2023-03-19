@@ -26,7 +26,6 @@ http.interceptors.response.use(
         await axios.get("/api/refresh");
         return http(originalRequest);
       } catch (err) {
-        error = err;
         store.commit("auth/setLoggedIn", false);
         router.push("/");
       }
