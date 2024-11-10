@@ -42,9 +42,10 @@
             placeholder="Password"
           />
 
-          <span
-            >Or register <router-link to="/register">here</router-link></span
-          >
+          <span>
+            Or register <router-link to="/register">here</router-link><br>
+            <router-link to="/forgot">Forgot password?</router-link>
+          </span>
 
           <button id="submit" :disabled="!canSubmit">Log in</button>
         </form>

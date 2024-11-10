@@ -48,6 +48,18 @@ const routes = [
     meta: { theme: "purple" },
   },
   {
+    path: "/forgot",
+    name: "Forgot Password",
+    component: () => import("./views/ForgotPasswordPage.vue"),
+    meta: { theme: "silver" },
+  },
+  {
+    path: "/resetpass",
+    name: "Reset Password",
+    component: () => import("./views/ResetPasswordPage.vue"),
+    meta: { theme: "silver" },
+  },
+  {
     path: "/confirm",
     name: "Confirm",
     component: () => import("./views/ConfirmPage.vue"),
