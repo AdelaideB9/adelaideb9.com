@@ -39,7 +39,7 @@ const routes = [
     path: "/about",
     name: "About",
     component: () => import("./views/AboutPage.vue"),
-    meta: { theme: "silver" },
+    meta: { theme: "navy-neutral" },
   },
   {
     path: "/register",
@@ -51,13 +51,13 @@ const routes = [
     path: "/forgot",
     name: "Forgot Password",
     component: () => import("./views/ForgotPasswordPage.vue"),
-    meta: { theme: "silver" },
+    meta: { theme: "navy" },
   },
   {
     path: "/resetpass",
     name: "Reset Password",
     component: () => import("./views/ResetPasswordPage.vue"),
-    meta: { theme: "silver" },
+    meta: { theme: "navy" },
   },
   {
     path: "/confirm",
