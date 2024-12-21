@@ -78,7 +78,7 @@
         </router-link>
         <router-link class="no-underline" to="/ctfs">CTFs</router-link>
         <router-link class="no-underline" to="/events">Events</router-link>
-        <a class="no-underline" href="https://blog.adelaideb9.com">Blog</a>
+        <a class="no-underline" href="https://blog.adelaideb9.com">Blog<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block stroke-current feather"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
         <router-link class="no-underline" to="/about">About</router-link>
       </div>
       <AccountDropdown />
@@ -126,7 +126,7 @@
         <a
           class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"
           href="https://blog.adelaideb9.com"
-          >Blog</a
+          >Blog<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block stroke-current feather"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a
         >
         <router-link
           class="no-underline p-2 hover:bg-primary hover:text-secondary rounded"

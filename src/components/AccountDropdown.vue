@@ -42,12 +42,13 @@
             placeholder="Password"
           />
 
-          <span>
-            Or register <router-link to="/register">here</router-link><br>
-            <router-link to="/forgot">Forgot password?</router-link>
+          <span class="gap-2 flex flex-wrap">
+            <button id="submit" class="inline-block" :disabled="!canSubmit">Log in</button>
+            <div class="flex-1 flex flex-wrap gap-x-2 items-center">
+              <router-link class="flex-none" to="/register">Register<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block stroke-current feather"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></router-link>
+              <router-link class="flex-none" to="/forgot">Forgot<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block stroke-current feather"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></router-link>
+            </div>
           </span>
-
-          <button id="submit" :disabled="!canSubmit">Log in</button>
         </form>
       </div>
     </div>

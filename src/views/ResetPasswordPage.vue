@@ -48,19 +48,33 @@ const route = useRoute();
 let password = ref("");
 let passwordRepeat = ref("");
 let submitted = ref(false);
+
 onMounted(async () => {
   if (!route.query.token) {
+    useToast().error("Missing Token");
     router.push("/");
   }
 });
+
 const submitPasswordReset = async () => {
   submitted.value = true;
-  let res = await http.post("/api/resetpass", {
+
+  // @todo: Enforce HTTPS if sending plain-text password?
+  http.post("/api/resetpass", {
     token: route.query.token,
     password: password.value,
+  }).then(res=>{
+    if(res.status != 200) throw res.statusText;
+    useToast().success(res.data);
+    router.push("/");
+  }).catch(err=>{
+    console.error("Password Reset Error",err);
+    useToast().error("Server Error");
+
+    //Unlock if failed
+    submitted.value = false;
   });
-  useToast().success(res.data);
-  router.push("/");
+
 };
 const isFormValid = computed(
   () =>
