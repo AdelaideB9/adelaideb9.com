@@ -20,7 +20,7 @@ const routes = [
   {
     path: "/events",
     name: "Events",
-    component: () => import("./views/EventsPage.vue"),
+    component: () => import("./views/EventsComboPage.vue"),
     meta: { theme: "blue" },
   },
   {
