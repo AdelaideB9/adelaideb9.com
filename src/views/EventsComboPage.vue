@@ -24,7 +24,7 @@ let listType = ref(null);
 
 const applyFilters = computed(() => {
   // Merge results
-  let result = Object.assign(ctfs.value,events.value);
+  let result = [...ctfs.value,...events.value];
 
   // Search
   if(query.value.length > 0){
@@ -40,7 +40,24 @@ const applyFilters = computed(() => {
   // List Type
   result = (listType.value)?result.filter(i=>i.type==listType.value):result
 
-  return result
+  return sortByDate(result)
+});
+
+const groupByYear = computed(() => {
+  // unique years
+  let years = applyFilters.value.map(i=>new Date(i.date).getFullYear()).filter((v,i,a)=>a.indexOf(v)===i);
+
+  // group
+  let obj = {};
+  years.forEach(year=>{
+    obj[year] = applyFilters.value.filter(i=>new Date(i.date).getFullYear() == year);
+  });
+
+  return obj;
+});
+
+const years = computed(() => {
+  return Object.keys(groupByYear.value)
 });
 
 function sortByDate(list) {
@@ -102,10 +119,13 @@ const pastCount = () => ([null,"ctf"].includes(listType.value)?ctfs.value.length
       Check out our <u class="cursor-pointer" @click="isUpcoming = false">past {{ pastCount() }} {{ noun() }}</u> in the meantime.
       <!-- Render Preview -->
     </p>
-    <Ticket
-      v-for="v in sortByDate(applyFilters)"
-      :key="v.id"
-      :details="v"
-    />
+    <div v-for="year in years.sort((a,b)=>b-a)" :key="year" class="flex flex-col gap-y-4">
+      <h3 class="text-3xl">{{ year }}</h3>
+      <Ticket
+        v-for="event in groupByYear[year]"
+        :key="event.id"
+        :details="event"
+      />
+    </div>
   </div>
 </template>
