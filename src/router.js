@@ -54,7 +54,7 @@ const routes = [
     meta: { theme: "navy" },
   },
   {
-    path: "/resetpass",
+    path: "/resetpassword",
     name: "Reset Password",
     component: () => import("./views/ResetPasswordPage.vue"),
     meta: { theme: "navy" },
