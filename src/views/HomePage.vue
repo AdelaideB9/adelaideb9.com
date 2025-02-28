@@ -4,6 +4,10 @@ import Ticket from '../components/Ticket.vue';
 import { computed, onMounted, ref } from "vue";
 import http from "../services/http";
 
+import { useStore } from 'vuex';
+import TicketSmall from '../components/TicketSmall.vue';
+const store = useStore();
+
 let ctfs = ref([]);
 let events = ref([]);
 let loaded = ref(false);
@@ -50,7 +54,7 @@ const combinedEvents = computed(() => {
         If you're a South Australian student who thinks this sounds interesting,
         come join us! We'd love to have you.<br/><br/>
 
-        <span class="m-auto flex gap-2 max-w-fit">
+        <span  class="m-auto flex gap-2 max-w-fit" >
           <SocialMedia
             src="/img/social/discord-brands.svg"
             href="https://discord.gg/M3x2Bkbb3N"
@@ -73,13 +77,15 @@ const combinedEvents = computed(() => {
   <div v-if="combinedEvents.length >= 1 && loaded" class="py-20 -mt-20 flex content-center justify-center items-center gap-12 flex-col-reverse lg:flex-row">
     <div class="space-y-5 text-lg">
       <h1 class="text-center" >Upcoming Events</h1>
-      <div v-if="combinedEvents.length >= 1 && loaded" >
-        <Ticket
+      <div v-if="combinedEvents.length >= 1 && loaded" class="flex flex-col gap-4">
+        <TicketSmall
           v-for="v of combinedEvents"
           :key="v.ID"
           :details="v"
         />
-        <a class="mt-8 text-center block cursor-pointer" href="/events">See all <span v-id="upcomingNumber && upcomingNumber > 3" class="text-sm opacity-75">[{{ upcomingNumber }}]</span></a>
+        <div class="w-full">
+          <a class="text-center block cursor-pointer block rounded-2xl border-solid border-black/5 border-2 bg-white/25 no-underline shrink py-4 px-12 m-auto w-max" href="/events">See all <span v-id="upcomingNumber > 3" class="text-sm opacity-75">[{{ upcomingNumber }}]</span></a>
+        </div>
       </div>
       <!-- div v-if="combinedEvents.length < 1 || loaded">
         <Ticket
