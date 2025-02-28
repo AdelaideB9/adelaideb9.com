@@ -76,7 +76,7 @@
 
           <span>
             <h6>Registered Email</h6>
-            <div class="flex justify-between gap-x-2 align-center">
+            <div class="flex justify-between gap-x-2 content-center">
               <input
                 type="text"
                 class="bg-black/5 border-black/25 cursor-not-allowed text-center w-full"
@@ -92,7 +92,7 @@
 
           <span>
             <h6>Name</h6>
-            <div class="flex gap-4 flex-col md:flex-row align-center">
+            <div class="flex gap-4 flex-col md:flex-row content-center">
               <input
                 v-model="firstName"
                 type="text"
@@ -113,7 +113,7 @@
 
           <span>
             <h6>Secondary Email</h6>
-            <div class="flex justify-between gap-x-2 align-center">
+            <div class="flex justify-between gap-x-2 content-center">
               <input
                 v-model="secondaryEmail"
                 type="text"
@@ -128,7 +128,7 @@
 
           <span>
             <h6>Event Username</h6>
-            <div class="flex justify-between gap-x-2 align-center">
+            <div class="flex justify-between gap-x-2 content-center">
               <input
                 v-model="username"
                 type="text"
