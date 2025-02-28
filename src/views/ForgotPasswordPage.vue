@@ -29,7 +29,7 @@ let submitted = ref(false);
 
 const submitPasswordReset = async () => {
   submitted.value = true;
-  let res = await http.post("/api/forgot", {
+  let res = await http.post("/api/resetrequest", {
     email: email.value
   });
   useToast().success(res.data);

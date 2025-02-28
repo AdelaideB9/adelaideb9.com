@@ -45,7 +45,7 @@ const routes = [
     path: "/register",
     name: "Register",
     component: () => import("./views/RegisterPage.vue"),
-    meta: { theme: "purple" },
+    meta: { theme: "navy" },
   },
   {
     path: "/forgot",
@@ -64,6 +64,18 @@ const routes = [
     name: "Confirm",
     component: () => import("./views/ConfirmPage.vue"),
     meta: { theme: "purple" },
+  },
+  {
+    path: "/resources",
+    name: "Resources",
+    component: () => import("./views/ResourcesPage.vue"),
+    meta: { theme: "navy" },
+  },
+  {
+    path: "/error",
+    name: "API Error",
+    component: () => import("./views/ErrorPage.vue"),
+    meta: { theme: "blue" },
   },
   {
     path: "/:pathMatch(.*)*",

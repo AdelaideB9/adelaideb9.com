@@ -66,59 +66,107 @@
         </form>
       </div> -->
 
+      <div class="flex flex-1 flex-col">
+        <h2>Account Details</h2>
+
+        <form
+          class="flex flex-col gap-y-4"
+          @submit.prevent="submitRegistration"
+        >
+
+          <span>
+            <h6>Registered Email</h6>
+            <div class="flex justify-between gap-x-2 align-center">
+              <input
+                type="text"
+                class="bg-black/5 border-black/25 cursor-not-allowed text-center w-full"
+                placeholder="Secondary Email"
+                readonly="true"
+                :value="store.state.auth.session.email"
+              />
+              <Tooltip>
+                Used for tracking graduation status & grant-membership reporting to YouX.
+              </Tooltip>
+            </div>
+          </span>
+
+          <span>
+            <h6>Name</h6>
+            <div class="flex gap-4 flex-col md:flex-row align-center">
+              <input
+                v-model="firstName"
+                type="text"
+                placeholder="First name"
+                class="bg-white/10 border-black/25 flex-1"
+              />
+              <input
+                v-model="lastName"
+                type="text"
+                placeholder="Last name"
+                class="bg-white/10 border-black/25 flex-1"
+              />
+              <Tooltip>
+                Used for grant-membership reporting to YouX.
+              </Tooltip>
+            </div>
+          </span>
+
+          <span>
+            <h6>Secondary Email</h6>
+            <div class="flex justify-between gap-x-2 align-center">
+              <input
+                v-model="secondaryEmail"
+                type="text"
+                class="bg-white/10 border-black/25 w-full"
+                placeholder="Secondary Email"
+              />
+              <Tooltip>
+                Used for post-graduate access & recovery.
+              </Tooltip>
+            </div>
+          </span>
+
+          <span>
+            <h6>Event Username</h6>
+            <div class="flex justify-between gap-x-2 align-center">
+              <input
+                v-model="username"
+                type="text"
+                class="bg-white/10 border-black/25 w-full"
+                placeholder="Username"
+              />
+            </div>
+          </span>
+
+          <div class="flex gap-4 flex-col content-end justify-between w-full md:flex-row-reverse">
+              <!-- p v-if="error.length > 0" >
+                  {{ error  }}
+              </p -->
+              <button class="w-min self-end" :disabled="!isFormValid || !hasChanges" @click="pushChanges">Update</button>
+            </div>
+
+        </form>
+      </div> 
+
       <div class="flex flex-1 flex-col gap-y-12">
         <div class="flex flex-col gap-6">
           <div class="flex justify-between">
-            <h2>Discord</h2>
+            <h2>Discord Connection</h2>
             <Tooltip>
-              Join our Discord server with the link in the footer, and send your
-              token to our bot (Kitten Bot#6383) to link your Discord account.
+              Join our Discord server with the link in the footer, and select the 'Linked Roles' option from the server title bar dropdown in the top left.
             </Tooltip>
           </div>
           <FieldButton
             v-model="discordText"
             :class="
-              store.state.auth.session['discord_linked']
-                ? 'text-green-300'
-                : generated
-                ? ''
-                : 'text-red-300'
+              store.state.auth.session['discord_linked'] ? 'text-green-300' : 
+              generated ? '' : 'text-red-300'
             "
             :readonly="true"
-            @click="
-              store.state.auth.session['discord_linked']
-                ? (showDisconnectPopup = true)
-                : generated
-                ? copyDiscordToken()
-                : generateDiscordToken()
-            "
+            @click="store.state.auth.session['discord_linked'] ? (showDisconnectPopup = true) : requestDiscordConnection()"
           >
-            <span v-if="store.state.auth.session['discord_linked']"
-              >Disconnect</span
-            >
-            <div
-              v-else-if="
-                !store.state.auth.session['discord_linked'] && generated
-              "
-              class="flex items-center gap-1"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 inline"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                />
-              </svg>
-              Copy
-            </div>
-            <span v-else>Generate token</span>
+            <span v-if="store.state.auth.session['discord_linked']">Disconnect</span>
+            <span v-else>Connect</span>
           </FieldButton>
           <FullscreenModal
             v-if="showDisconnectPopup"
@@ -181,12 +229,17 @@ let discordText = ref(
     : "Not connected to Discord"
 );
 
-let firstName = ref(store.state.auth.session["first_name"]);
-let lastName = ref(store.state.auth.session["last_name"]);
-let password = ref("");
-let passwordRepeat = ref("");
+let firstName       = ref(store.state.auth.session["first_name"]);
+let lastName        = ref(store.state.auth.session["last_name"]);
+let username        = ref(store.state.auth.session["username"]);
+let secondaryEmail  = ref(store.state.auth.session["secondary_email"]);
+
+//let password  = ref("");
+//let passwordRepeat = ref("");
 
 let generated = ref(false);
+
+let error = ref("");
 
 const deleteAccount = () => {
   console.log("deleted");
@@ -196,6 +249,10 @@ const generateDiscordToken = async () => {
   let res = await http.get("/api/discord/generate");
   generated.value = true;
   discordText.value = "./auth " + res.data;
+};
+
+const requestDiscordConnection = async () => {
+  window.open('/api/discord/request') 
 };
 
 const disconnectDiscord = async () => {
@@ -208,11 +265,43 @@ const copyDiscordToken = () => {
   navigator.clipboard.writeText(discordText.value);
 };
 
+const pushChanges = async ()=>{
+  error.value = "";
+  if (username.value != store.state.auth.session["username"] ){
+    let res = await http.post("/api/setusername",{ username: username.value });
+    if( res.status != 200 ){
+      error.value += "Error updating username.";
+    }
+  }
+
+  if (secondaryEmail.value != store.state.auth.session["secondary_email"]) {
+    let res = await http.post("/api/setsecondaryemail",{ secondary_email: secondaryEmail.value });
+    if( res.status != 200 ){
+      error.value += "Error updating email.";
+    }
+  }
+
+  if (firstName.value != store.state.auth.session["first_name"] || lastName.value != store.state.auth.session["last_name"] ) {
+    let res = await http.post("/api/setname",{ first_name: firstName.value, last_name: lastName.value });
+    if( res.status != 200 ){
+      error.value += "Error updating name.";
+    }
+  }
+
+};
+
+const hasChanges = computed(()=>
+  firstName.value      != store.state.auth.session["first_name"]      ||
+  lastName.value       != store.state.auth.session["last_name"]       ||
+  secondaryEmail.value != store.state.auth.session["secondary_email"] ||
+  username.value       != store.state.auth.session["username"]        
+);
+
 const isFormValid = computed(
   () =>
     firstName.value != "" &&
-    lastName.value != "" &&
+    lastName.value != "" /*&&
     password.value.length >= 8 &&
-    password.value == passwordRepeat.value
+    password.value == passwordRepeat.value*/
 );
 </script>
