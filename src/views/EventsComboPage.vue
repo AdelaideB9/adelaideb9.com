@@ -3,10 +3,17 @@ import { computed, onMounted, ref } from "vue";
 import Ticket from "../components/Ticket.vue";
 import http from "../services/http";
 
+// Data
 let ctfs = ref([]);
 let events = ref([]);
-let query = ref("");
+
+// Lazy Loading
 let loaded = ref(false);
+
+// Filters
+let query = ref("");
+let isUpcoming = ref(true);
+let listType = ref(null);
 
 onMounted(async () => {
   http.get("/api/ctfs").then((res=>{
@@ -18,9 +25,6 @@ onMounted(async () => {
     loaded.value = true;
   }));
 });
-
-let isUpcoming = ref(true);
-let listType = ref(null);
 
 const applyFilters = computed(() => {
   // Merge results
@@ -120,7 +124,7 @@ const pastCount = () => ([null,"ctf"].includes(listType.value)?ctfs.value.length
       <!-- Render Preview -->
     </p>
     <div v-for="year in years.sort((a,b)=>b-a)" :key="year" class="flex flex-col gap-y-4">
-      <h3 class="text-3xl">{{ year }}</h3>
+      <h3 class="text-3xl">{{ year }} <span class="text-sm opacity-75">[{{ groupByYear[year].length }}]</span></h3>
       <Ticket
         v-for="event in groupByYear[year]"
         :key="event.id"
