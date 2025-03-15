@@ -6,7 +6,7 @@ import http from "../services/http";
 
 import { useStore } from 'vuex';
 import TicketSmall from '../components/TicketSmall.vue';
-const store = useStore();
+//const store = useStore();
 
 let ctfs = ref([]);
 let events = ref([]);
@@ -41,6 +41,7 @@ const combinedEvents = computed(() => {
 </script>
 
 <template>
+<div>
   <div
     class="min-h-screen py-20 -mt-20 flex content-center justify-center items-center gap-12 flex-col-reverse lg:flex-row"
   >
@@ -65,7 +66,7 @@ const combinedEvents = computed(() => {
             <div class="flex bg-primary border-2 border-current rounded-md p-2 gap-2"
               style="max-width: fit-content; padding: 0.5em 2em;" >
               <p class="block font-medium tracking-tighter text-center h-8">
-                Register<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block stroke-current feather"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                Register&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block stroke-current feather"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
               </p>
             </div>
           </a>
@@ -73,18 +74,21 @@ const combinedEvents = computed(() => {
       </p>
     </div>
     <img src="/img/logo.png" class="w-96" />
+    <br/>
   </div>
   <div v-if="combinedEvents.length >= 1 && loaded" class="py-20 -mt-20 flex content-center justify-center items-center gap-12 flex-col-reverse lg:flex-row">
     <div class="space-y-5 text-lg">
       <h1 class="text-center" >Upcoming Events</h1>
       <div v-if="combinedEvents.length >= 1 && loaded" class="flex flex-col gap-4">
-        <TicketSmall
-          v-for="v of combinedEvents"
-          :key="v.ID"
-          :details="v"
-        />
+        <div>
+          <TicketSmall
+            v-for="v of combinedEvents"
+            :key="v.ID"
+            :details="v"
+          />
+        </div>
         <div class="w-full">
-          <a class="text-center block cursor-pointer block rounded-2xl border-solid border-black/5 border-2 bg-white/25 no-underline shrink py-4 px-12 m-auto w-max" href="/events">See all <span v-id="upcomingNumber > 3" class="text-sm opacity-75">[{{ upcomingNumber }}]</span></a>
+          <a class="text-center block cursor-pointer block rounded-2xl border-solid border-black/5 border-2 bg-white/25 no-underline shrink py-4 px-12 m-auto w-max" href="/events">See all <span v-if="upcomingNumber > 3" class="text-sm opacity-75">[{{ upcomingNumber }}]</span></a>
         </div>
       </div>
       <!-- div v-if="combinedEvents.length < 1 || loaded">
@@ -96,4 +100,5 @@ const combinedEvents = computed(() => {
       </div -->
     </div>
   </div>
+</div>
 </template>

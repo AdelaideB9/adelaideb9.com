@@ -75,7 +75,7 @@ const routes = [
     path: "/error",
     name: "API Error",
     component: () => import("./views/ErrorPage.vue"),
-    meta: { theme: "blue" },
+    meta: { theme: "navy-neutral" },
   },
   {
     path: "/:pathMatch(.*)*",

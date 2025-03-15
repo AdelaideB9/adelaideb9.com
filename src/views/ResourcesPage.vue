@@ -1,17 +1,19 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import http from "../services/http";
+//import http from "../services/http";
+import axios from "axios";
 let toolsMarkdown = ref("");
 let learningMarkdown = ref("");
 
 onMounted(async () => {
-  http.get(
+  //intentionally avoiding http not to display error
+  axios.get(
     "https://raw.githubusercontent.com/AdelaideB9/directory/main/TOOLS.md"
   ).then(res=>{
     toolsMarkdown.value = res.data;
   });
 
-  http.get(
+  axios.get(
     "https://raw.githubusercontent.com/AdelaideB9/directory/main/LEARNING.md"
   ).then(res=>{
     learningMarkdown.value = res.data;
@@ -29,14 +31,14 @@ onMounted(async () => {
     <div class="flex flex-col md:flex-row gap-x-4 w-full">
       <a href="https://weekly.adelaideb9.com" class="no-underline block grow">
         <div class="bg-black/25 p-4 my-4 rounded-md w-full">
-          <span class="m-0"><b class="text-2xl">Weekly<img src="/img/icons/external-link.svg" class="inline stroke-current"/></b><br>
+          <span class="m-0"><b class="text-2xl">Weekly<div class="inline-block bg-current" style="height: 1em;width: 1em;mask-image: url(/img/icons/external-link.svg); mask-size: cover; vertical-align: middle;"></div></b><br>
             Our challenge per week CTF since 2024.
           </span>
         </div>
       </a>
       <a href="https://crypto.adelaideb9.com" class="no-underline block grow">
         <div class="bg-black/25 p-4 my-4 rounded-md w-full">
-          <span class="m-0"><b class="text-2xl">Crypto Workshop<img src="/img/icons/external-link.svg" class="inline stroke-current"/></b><br>
+          <span class="m-0"><b class="text-2xl">Crypto Workshop<div class="inline-block bg-current" style="height: 1em;width: 1em;mask-image: url(/img/icons/external-link.svg); mask-size: cover; vertical-align: middle;"></div></b><br>
             Our 2024 Cryptography workshop
           </span>
         </div>
