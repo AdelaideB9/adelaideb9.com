@@ -29,21 +29,11 @@ jobs:
       run: | # 2>/dev/null to ignore warnings
         npm run build 2>/dev/null
 
-    - name: Create a tag
-      id: create_tag
-      run: |
-        COMMIT_HASH=$(git rev-parse --short HEAD)  #
-        TAG_NAME="build_${{ github.run_number }}-${COMMIT_HASH}"  
-        git tag $TAG_NAME
-        git push origin $TAG_NAME
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Create a GitHub release
       id: release
       uses: softprops/action-gh-release@v1
       with:
         files: 'dist/**/*'  
-        tag_name: $TAG_NAME
+        tag_name: build
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
