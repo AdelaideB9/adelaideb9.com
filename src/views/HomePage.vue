@@ -55,21 +55,26 @@ const combinedEvents = computed(() => {
         If you're a South Australian student who thinks this sounds interesting,
         come join us! We'd love to have you.<br/><br/>
 
-        <span  class="m-auto flex gap-2 max-w-fit" >
+        <span class="m-auto flex flex-row flex-wrap justify-center gap-4 max-w-fit" >
           <SocialMedia
             src="/img/social/discord-brands.svg"
             href="https://discord.gg/M3x2Bkbb3N"
-            :exclusive="true"
-            style="max-width: fit-content; padding: 1em 3em;"
+            :join="true"
           />
-          <a class="no-underline text-s" href="/register">
-            <div class="flex bg-primary border-2 border-current rounded-md p-2 gap-2"
-              style="max-width: fit-content; padding: 0.5em 2em;" >
+          <router-link class="no-underline text-s self-center" to="/register">
+            <!-- div class="flex bg-primary border-2 border-current rounded-md px-6 py-2 gap-2">
               <p class="block font-medium tracking-tighter text-center h-8">
                 Register&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block stroke-current feather"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
               </p>
-            </div>
-          </a>
+            </div -->
+
+          <div class="flex backdrop-filter backdrop-brightness-90 rounded-md py-3 gap-4 hover:brightness-95" style="background: var(--color-secondary)">
+            <p class="block font-medium tracking-tighter text-center mx-10 text-nowrap">
+              Register<img src="img/icons/external-link-dark.svg" class="inline"/>
+            </p>
+          </div>
+
+          </router-link>
         </span>
       </p>
     </div>

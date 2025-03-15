@@ -124,6 +124,7 @@
               />
               <Tooltip>
                 Used for post-graduate access & recovery.
+                Must not be an .edu.au address.
               </Tooltip>
             </div>
           </span>
