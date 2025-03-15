@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/forgot-password
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,11 +30,20 @@ jobs:
       run: |
         zip -r release.zip dist
 
+    - name: Tag the repository
+      id: tag
+      run: |
+        COMMIT_HASH=$(git rev-parse --short HEAD)  
+        TAG_NAME="build_${{ github.run_number }}-${COMMIT_HASH}"  
+        echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+        git tag -a $TAG_NAME -m "Autobuild" ${GITHUB_SHA}
+        git push origin $TAG_NAME
+
     - name: Create a GitHub release
       id: release
       uses: softprops/action-gh-release@v1
       with:
         files: 'release.zip'  
-        tag_name: build
+        tag_name: ${{ steps.tag.outputs.tag }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
