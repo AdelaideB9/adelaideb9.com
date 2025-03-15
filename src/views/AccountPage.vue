@@ -148,8 +148,8 @@
                  <span class="flex rounded-full bg-red-500 uppercase px-2 py-1 text-xs font-bold mr-3">Error</span>
                 <span class="font-semibold mr-2 text-left flex-auto">{{ e }}</span>
               </div -->
-              <div class="items-center m-0 p-0 bg-red-600 text-indigo-100 leading-none rounded-full flex overflow-hidden gap-2" style="height: 2em;padding-right: 8px;" v-if="errors.length > 0">
-                <span class="flex rounded-full bg-red-500 uppercase px-6 py-2 text-xs font-bold" style="box-shadow: 0 0 10px 0px rgb(255 0 0 / 100%);">Error</span>
+              <div class="items-center m-0 p-0 bg-red-600 text-red-100 leading-none rounded-full flex overflow-hidden gap-2 select-none" style="height: 2em;padding-right: 8px;" v-if="errors.length > 0">
+                <span class="flex rounded-full bg-red-500 uppercase px-6 py-2 text-xs font-bold text-white" style="box-shadow: 0 0 10px 0px rgb(255 0 0 / 100%);">Error</span>
                 <span class="font-semibold rounded-full uppercase px-0 text-xs font-bold text-left mx-2" v-for="e in errors" :key="e">{{ e }}</span>
               </div>
             </div>
