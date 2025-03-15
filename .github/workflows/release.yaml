@@ -2,6 +2,8 @@ name: Build Website
 
 on:
   push:
+    tags:
+      - 'build_*'
     #branches:
     #  - main 
 
@@ -25,17 +27,6 @@ jobs:
     - name: Build Website 
       run: | # 2>/dev/null to ignore warnings
         npm run build 2>/dev/null
-
-    - name: Create a tag
-      id: create_tag
-      run: |
-        BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/\//-/g')  # Extract branch name and replace slashes with hyphens
-        COMMIT_HASH=$(git rev-parse --short HEAD)  # Get short commit hash (first 7 characters)
-        TAG_NAME="build_{BRANCH_NAME}-${COMMIT_HASH}"  # Create tag with branch name and short commit hash
-        git tag $TAG_NAME
-        git push origin $TAG_NAME
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create a GitHub release
       id: release
