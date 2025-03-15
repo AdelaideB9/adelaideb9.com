@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/forgot-password
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,11 +25,15 @@ jobs:
       run: | # 2>/dev/null to ignore warnings
         npm run build 2>/dev/null
 
+    - name: Zip Release
+      run: |
+        zip -r release.zip dist
+
     - name: Create a GitHub release
       id: release
       uses: softprops/action-gh-release@v1
       with:
-        files: 'dist/**/*'  
+        files: 'release.zip'  
         tag_name: build
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
