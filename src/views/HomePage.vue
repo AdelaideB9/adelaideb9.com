@@ -70,7 +70,7 @@ const combinedEvents = computed(() => {
 
           <div class="flex backdrop-filter bg-black/10 rounded-md py-3 gap-4 hover:brightness-95">
             <p class="block font-medium tracking-tighter text-center mx-10 text-nowrap">
-              Register<img src="/public/img/icons/external-link-dark.svg" class="inline"/>
+              Register<img src="/img/icons/external-link-dark.svg" class="inline"/>
             </p>
           </div>
 

@@ -8,7 +8,7 @@ let learningMarkdown = ref("");
 onMounted(async () => {
   //intentionally avoiding http not to display error
   axios.get(
-    "https://raw.githubusercontent.com/AdelaideB9/directory/main/TOOLS.md"
+    "https://raw.githubusercontent.com/AdelaideB9/directory/refs/heads/main/TOOLS.md"
   ).then(res=>{
     toolsMarkdown.value = res.data;
   });
@@ -54,7 +54,7 @@ onMounted(async () => {
     <br/>
     <span v-if="toolsMarkdown.length > 0">
       <h1>Tools</h1>
-      <VueShowdown id="markdownTools" :markdown="toolsMarkdown" />
+      <VueShowdown id="markdownTools" flavor="github" :options="{simpleLineBreaks:true}" :markdown="toolsMarkdown" />
       <br/>
     </span>
     <span v-if="learningMarkdown.length > 0">
@@ -80,6 +80,39 @@ h3 {
 
 p {
   @apply mb-4;
+}
+
+</style>
+
+<style lang="scss" scoped>
+#markdown {
+  :deep(h1) {
+    @apply mb-4;
+  }
+
+  :deep(h2) {
+    @apply mt-8 mb-4;
+  }
+
+  :deep(ul) {
+    @apply list-disc m-4 pl-6;
+  }
+
+  :deep(li) {
+    @apply m-1;
+  }
+
+  :deep(ol) {
+    @apply list-decimal m-4 pl-6;
+  }
+
+  :deep(p) {
+    @apply mb-4;
+  }
+
+  :deep(code) {
+    background: rgba(0,0,0,0.25);
+  }
 }
 </style>
 

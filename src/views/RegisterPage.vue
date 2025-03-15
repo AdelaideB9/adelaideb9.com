@@ -12,7 +12,7 @@
           member platforms.<br/><br/>
 
           <b>You will need to use your student email (ending in .edu.au)</b><br/>
-          Non-Students may request an account via <a href="mailto:hello@adelaideb9.com">email</a>.
+          Non-students may request an account via <a href="mailto:hello@adelaideb9.com">email</a>.
         </p>
       </div>
     </div>
