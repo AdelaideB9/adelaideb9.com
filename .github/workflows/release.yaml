@@ -1,4 +1,4 @@
-name: Build and Release Website
+name: Build Website
 
 on:
   push:
@@ -22,9 +22,20 @@ jobs:
       run: |
         npm install
 
-    - name: Build the Vue.js project
+    - name: Build Website
       run: |
-        npm run build  # This should match the build command in your package.json
+        npm run build
+
+    - name: Create a tag
+      id: create_tag
+      run: |
+        BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/\//-/g')  # Extract branch name and replace slashes with hyphens
+        COMMIT_HASH=$(git rev-parse --short HEAD)  # Get short commit hash (first 7 characters)
+        TAG_NAME="build_{BRANCH_NAME}-${COMMIT_HASH}"  # Create tag with branch name and short commit hash
+        git tag $TAG_NAME
+        git push origin $TAG_NAME
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create a GitHub release
       id: release
@@ -33,7 +44,3 @@ jobs:
         files: 'dist/**/*'  
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-
-    - name: Upload Release Assets
-      run: |
-        echo "Release Assets are published!"
