@@ -1,0 +1,39 @@
+name: Build and Release Website
+
+on:
+  push:
+    #branches:
+    #  - main 
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'  # idk
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Build the Vue.js project
+      run: |
+        npm run build  # This should match the build command in your package.json
+
+    - name: Create a GitHub release
+      id: release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: 'dist/**/*'  
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+
+    - name: Upload Release Assets
+      run: |
+        echo "Release Assets are published!"
