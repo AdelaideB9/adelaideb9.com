@@ -1,0 +1,51 @@
+name: Build Website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'  # idk
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Build Website 
+      run: | # 2>/dev/null to ignore warnings
+        npm run build 2>/dev/null
+
+    - name: Zip Release
+      run: |
+        zip -r release.zip dist
+
+    - name: Tag the repository
+      id: tag
+      run: |
+        git config --global user.email "runner@github.com"
+        git config --global user.name "Github Actions"
+        COMMIT_HASH=$(git rev-parse --short HEAD)  
+        TAG_NAME="build_${{ github.run_number }}-${COMMIT_HASH}"  
+        echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+        git tag -a $TAG_NAME -m "Autobuild" ${GITHUB_SHA}
+        git push origin $TAG_NAME
+
+    - name: Create a GitHub release
+      id: release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: 'release.zip'  
+        tag_name: ${{ steps.tag.outputs.tag }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  

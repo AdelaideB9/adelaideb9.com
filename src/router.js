@@ -20,7 +20,7 @@ const routes = [
   {
     path: "/events",
     name: "Events",
-    component: () => import("./views/EventsPage.vue"),
+    component: () => import("./views/EventsComboPage.vue"),
     meta: { theme: "blue" },
   },
   {
@@ -39,19 +39,43 @@ const routes = [
     path: "/about",
     name: "About",
     component: () => import("./views/AboutPage.vue"),
-    meta: { theme: "silver" },
+    meta: { theme: "navy-neutral" },
   },
   {
     path: "/register",
     name: "Register",
     component: () => import("./views/RegisterPage.vue"),
-    meta: { theme: "purple" },
+    meta: { theme: "navy" },
+  },
+  {
+    path: "/forgot",
+    name: "Forgot Password",
+    component: () => import("./views/ForgotPasswordPage.vue"),
+    meta: { theme: "navy" },
+  },
+  {
+    path: "/resetpassword",
+    name: "Reset Password",
+    component: () => import("./views/ResetPasswordPage.vue"),
+    meta: { theme: "navy" },
   },
   {
     path: "/confirm",
     name: "Confirm",
     component: () => import("./views/ConfirmPage.vue"),
     meta: { theme: "purple" },
+  },
+  {
+    path: "/resources",
+    name: "Resources",
+    component: () => import("./views/ResourcesPage.vue"),
+    meta: { theme: "navy" },
+  },
+  {
+    path: "/error",
+    name: "API Error",
+    component: () => import("./views/ErrorPage.vue"),
+    meta: { theme: "navy-neutral" },
   },
   {
     path: "/:pathMatch(.*)*",

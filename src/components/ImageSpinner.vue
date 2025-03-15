@@ -10,6 +10,10 @@ defineProps({
     type: String,
     default: "",
   },
+  style: {
+    type: String,
+    default: "",
+  },
 });
 
 let loaded = ref(false);
@@ -20,7 +24,7 @@ let loaded = ref(false);
     <div v-show="!loaded" class="fulfilling-square-spinner">
       <div class="spinner-inner"></div>
     </div>
-    <img v-show="loaded" :src="src" :alt="alt" @load="loaded = true" />
+    <img v-show="loaded" :src="src" :style="style" :alt="alt" @load="loaded = true" />
   </div>
 </template>
 

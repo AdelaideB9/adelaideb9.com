@@ -7,5 +7,13 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 - [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
 
 ## Running
+```sh
+npm install
+```
+First time only
 
-`npm run dev`
+```sh
+npm run dev
+```
+Run test server, assumes locally run backend at 8090
+Change backend /api proxy in `vite.config.js`

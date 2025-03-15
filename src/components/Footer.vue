@@ -20,6 +20,11 @@ import SocialMedia from "./SocialMedia.vue";
       />
       <SocialMedia
         class=""
+        src="/img/social/instagram-brands.svg"
+        href="https://www.instagram.com/uoactfclub/"
+      />
+      <SocialMedia
+        class=""
         src="/img/social/github-brands.svg"
         href="https://github.com/adelaideb9"
       />
@@ -43,7 +48,7 @@ import SocialMedia from "./SocialMedia.vue";
     <div class="flex items-end">
       <img class="h-14 mr-6 hidden lg:block" src="/img/logo.png" />
       <div class="flex-col">
-        <h3 class="font-logo font-normal">ADELAIDE B9</h3>
+        <h3 class="font-logo font-normal">ADELAIDEB9</h3>
         <p class="text-sm">
           The University of Adelaide, North Terrace<br />&copy;
           {{ new Date().getFullYear() }} AdelaideB9

@@ -43,6 +43,22 @@
   --color-secondary: 1 42 54;
 }
 
+.theme-navy {
+  --color-primary: 1 42 54;
+  --color-secondary: 71 255 166;
+}
+
+.theme-navy-neutral {
+  --color-primary: 1 42 54;
+  --color-secondary: 216 215 215;
+}
+
+.theme-paper {
+  --color-primary: 255 255 255;
+  --color-secondary: 0 0 0;
+}
+
+/* -- Old Themes, use above -- */
 .theme-purple {
   --color-primary: 165 111 235;
   --color-secondary: 255 255 255;

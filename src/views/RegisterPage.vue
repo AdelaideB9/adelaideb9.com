@@ -9,9 +9,10 @@
           Complete this form to join Capture the Flag Club, free of charge! By
           signing up you'll gain admission to our club events (in-person and
           online), access to our private Discord channels, and more perks on our
-          member platforms.
+          member platforms.<br/><br/>
 
-          <b>You will need to use your student email (ending in .edu.au)</b>
+          <b>You will need to use your student email (ending in .edu.au)</b><br/>
+          Non-students may request an account via <a href="mailto:hello@adelaideb9.com">email</a>.
         </p>
       </div>
     </div>
