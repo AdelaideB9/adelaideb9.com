@@ -68,7 +68,7 @@ const combinedEvents = computed(() => {
               </p>
             </div -->
 
-          <div class="flex backdrop-filter backdrop-brightness-90 rounded-md py-3 gap-4 hover:brightness-95" style="background: var(--color-secondary)">
+          <div class="flex backdrop-filter bg-black/10 rounded-md py-3 gap-4 hover:brightness-95">
             <p class="block font-medium tracking-tighter text-center mx-10 text-nowrap">
               Register<img src="img/icons/external-link-dark.svg" class="inline"/>
             </p>
