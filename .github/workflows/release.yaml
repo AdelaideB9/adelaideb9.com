@@ -2,8 +2,8 @@ name: Build Website
 
 on:
   push:
-    tags:
-      - 'build_*'
+    #tags:
+    #  - 'build_*'
     #branches:
     #  - main 
 
