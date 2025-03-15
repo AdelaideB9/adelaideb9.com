@@ -6,7 +6,7 @@ on:
     #  - main 
 
 jobs:
-  build_and_release:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,9 +22,9 @@ jobs:
       run: |
         npm install
 
-    - name: Build Website
-      run: |
-        npm run build
+    - name: Build Website 
+      run: | # 2>/dev/null to ignore warnings
+        npm run build 2>/dev/null
 
     - name: Create a tag
       id: create_tag
