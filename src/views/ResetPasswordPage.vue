@@ -60,7 +60,7 @@ const submitPasswordReset = async () => {
   submitted.value = true;
 
   // @todo: Enforce HTTPS if sending plain-text password?
-  http.post("/api/resetpass", {
+  http.post("/api/resetpassword", {
     token: route.query.token,
     password: password.value,
   }).then(res=>{

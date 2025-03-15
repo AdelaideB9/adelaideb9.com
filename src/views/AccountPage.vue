@@ -105,9 +105,11 @@
                 placeholder="Last name"
                 class="bg-white/10 border-black/25 flex-1"
               />
-              <Tooltip>
-                Used for grant-membership reporting to YouX.
-              </Tooltip>
+              <div class="self-end">
+                <Tooltip>
+                  Used for grant-membership reporting to YouX.
+                </Tooltip>
+              </div>
             </div>
           </span>
 
@@ -139,10 +141,16 @@
           </span>
 
           <div class="flex gap-4 flex-col content-end justify-between w-full md:flex-row-reverse">
-              <!-- p v-if="error.length > 0" >
-                  {{ error  }}
-              </p -->
               <button class="w-min self-end" :disabled="!isFormValid || !hasChanges" @click="pushChanges">Update</button>
+              <p v-if="errors.length > 0"></p>
+              <!-- div v-for="e in errors" class="py-2 px-3 border-2 border-red-500 bg-red-600 items-center text-indigo-100 leading-none rounded-full inline-flex" role="alert" :key="e">
+                 <span class="flex rounded-full bg-red-500 uppercase px-2 py-1 text-xs font-bold mr-3">Error</span>
+                <span class="font-semibold mr-2 text-left flex-auto">{{ e }}</span>
+              </div -->
+              <div class="items-center m-0 p-0 bg-red-600 text-indigo-100 leading-none rounded-full flex overflow-hidden gap-2" style="height: 2em;padding-right: 8px;" v-if="errors.length > 0">
+                <span class="flex rounded-full bg-red-500 uppercase px-6 py-2 text-xs font-bold" style="box-shadow: 0 0 10px 0px rgb(255 0 0 / 100%);">Error</span>
+                <span class="font-semibold rounded-full uppercase px-0 text-xs font-bold text-left mx-2" v-for="e in errors" :key="e">{{ e }}</span>
+              </div>
             </div>
 
         </form>
@@ -153,7 +161,7 @@
           <div class="flex justify-between">
             <h2>Discord Connection</h2>
             <Tooltip>
-              Join our Discord server with the link in the footer, and select the 'Linked Roles' option from the server title bar dropdown in the top left.
+              Join our Discord server with the link in the footer, and select the 'Linked Roles' option from the server title bar dropdown on the top left.
             </Tooltip>
           </div>
           <FieldButton
@@ -168,6 +176,7 @@
             <span v-if="store.state.auth.session['discord_linked']">Disconnect</span>
             <span v-else>Connect</span>
           </FieldButton>
+          <a class="m-auto" v-if="store.state.auth.session['discord_linked']" target="_blank" href="https://support.discord.com/hc/en-us/articles/8063233404823#h_01GK286J648XF4HPGKZYW9AMQF" alt="Discord Linked Role Help Article">Read more about Linked Roles in Discord<img style="display:inline-block;text-decoration: underline;" src="/img/icons/external-link.svg"/></a>
           <FullscreenModal
             v-if="showDisconnectPopup"
             title="Disconnect Discord"
@@ -218,7 +227,8 @@ import FieldButton from "../components/FieldButton.vue";
 import FullscreenModal from "../components/FullscreenModal.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import http from "../services/http";
+import axios from "axios";
+import http, { axiosBegin, axiosError, axiosSuccess } from "../services/http";
 
 let showDeletePopup = ref(false);
 let showDisconnectPopup = ref(false);
@@ -239,7 +249,7 @@ let secondaryEmail  = ref(store.state.auth.session["secondary_email"]);
 
 let generated = ref(false);
 
-let error = ref("");
+let errors = ref([])
 
 const deleteAccount = () => {
   console.log("deleted");
@@ -266,35 +276,68 @@ const copyDiscordToken = () => {
 };
 
 const pushChanges = async ()=>{
-  error.value = "";
-  if (username.value != store.state.auth.session["username"] ){
-    let res = await http.post("/api/setusername",{ username: username.value });
-    if( res.status != 200 ){
-      error.value += "Error updating username.";
+  errors.value = [];
+  try{
+    if (username.value != store.state.auth.session["username"] ){
+      const axiosUser = axios.create();
+      axiosUser.interceptors.request.use(axiosBegin);
+      axiosUser.interceptors.response.use(axiosSuccess, (error)=>{
+        error.response.data.message = "Error Updating Username\nName might be taken!";
+        console.log(error.response);
+        return axiosError(error);
+      });
+      let res = await axiosUser.post("/api/setusername",{ username: username.value });
+      if( res.status != 200 ){
+        errors.value.push("username");
+      }
     }
+  } catch (err) {
+    errors.value.push("username");
   }
 
-  if (secondaryEmail.value != store.state.auth.session["secondary_email"]) {
-    let res = await http.post("/api/setsecondaryemail",{ secondary_email: secondaryEmail.value });
-    if( res.status != 200 ){
-      error.value += "Error updating email.";
+  try{
+    if (secondaryEmail.value != store.state.auth.session["secondary_email"]) {
+      const axiosEmail = axios.create();
+      axiosEmail.interceptors.request.use(axiosBegin);
+      axiosEmail.interceptors.response.use(axiosSuccess, (error)=>{
+        error.response.data.message = "Error Updating Email\nEmail must not be Educational";
+        console.log(error.response);
+        return axiosError(error);
+      });
+      let res = await axiosEmail.post("/api/setsecondaryemail",{ email: secondaryEmail.value });
+      if( res.status != 200 ){
+        errors.value.push("email");
+      }
     }
+  } catch (err) {
+    errors.value.push("email");
   }
 
-  if (firstName.value != store.state.auth.session["first_name"] || lastName.value != store.state.auth.session["last_name"] ) {
-    let res = await http.post("/api/setname",{ first_name: firstName.value, last_name: lastName.value });
-    if( res.status != 200 ){
-      error.value += "Error updating name.";
+  try{
+    if (firstName.value != store.state.auth.session["first_name"] || lastName.value != store.state.auth.session["last_name"] ) {
+      const axiosName = axios.create();
+      axiosName.interceptors.request.use(axiosBegin);
+      axiosName.interceptors.response.use(axiosSuccess, (error)=>{
+        error.response.data.message = "Error Updating Name";
+        console.log(error.response);
+        return axiosError(error);
+      });
+      let res = await axiosName.post("/api/setname",{ "first-name": firstName.value, "last-name": lastName.value });
+      if( res.status != 200 ){
+        errors.value.push("name");
+      }
     }
+  } catch (err) {
+    errors.value.push("name");
   }
 
 };
 
 const hasChanges = computed(()=>
-  firstName.value      != store.state.auth.session["first_name"]      ||
-  lastName.value       != store.state.auth.session["last_name"]       ||
-  secondaryEmail.value != store.state.auth.session["secondary_email"] ||
-  username.value       != store.state.auth.session["username"]        
+  firstName.value.trim()      != store.state.auth.session["first_name"]      ||
+  lastName.value.trim()       != store.state.auth.session["last_name"]       ||
+  secondaryEmail.value.trim() != store.state.auth.session["secondary_email"] ||
+  username.value.trim()       != store.state.auth.session["username"]        
 );
 
 const isFormValid = computed(
