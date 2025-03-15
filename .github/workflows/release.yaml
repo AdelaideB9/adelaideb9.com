@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - feature/forgot-password
+      
 jobs:
   build:
     runs-on: ubuntu-latest
